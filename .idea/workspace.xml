@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +18,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -54,6 +54,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "com.shpp.mentoring.okushin.task3.StringGenerator",
     "last_opened_file_path": "C:/workspace/firstPractice",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -66,24 +68,19 @@
       <recent name="C:\workspace\thirdPractice\src\main\java\com\shpp\mentoring\okuhin\task3" />
       <recent name="C:\workspace\thirdPractice\src\main\resources" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="com.shpp.mentoring.okushin.task3.StringGenerator" />
+      <recent name="com.shpp.mentoring.okushin.task3.MessageManager" />
+      <recent name="com.shpp.mentoring.okushin.task3.ActiveMqManager" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.shpp.mentoring.okushin.task3" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.shpp.mentoring.okushin.task2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.shpp.mentoring.okushin.task3.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okuhin.task3.App" />
-      <module name="thirdPractice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shpp.mentoring.okuhin.task3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.ActiveMqManagerTest.testCreateActiveMQSession">
     <configuration name="com.shpp.mentoring.okushin.task3.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.App" />
       <module name="thirdPractice" />
@@ -97,10 +94,76 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ActiveMqManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ActiveMqManagerTest.testCreateActiveMQSession" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
+      <option name="METHOD_NAME" value="testCreateActiveMQSession" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ActiveMqManagerTest.testCreateNewConnectionForConsumer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
+      <option name="METHOD_NAME" value="testCreateNewConnectionForConsumer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ActiveMqManagerTest.testCreateNewConnectionForProducer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
+      <option name="METHOD_NAME" value="testCreateNewConnectionForProducer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateActiveMQSession" />
+        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateNewConnectionForConsumer" />
+        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateNewConnectionForProducer" />
         <item itemvalue="Application.com.shpp.mentoring.okushin.task3.App" />
-        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.ActiveMqManagerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -113,6 +176,23 @@
       <option name="presentableId" value="Default" />
       <updated>1678197874200</updated>
     </task>
+    <task id="LOCAL-00001" summary="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;">
+      <created>1678996853348</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678996853348</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
   </component>
 </project>
