@@ -119,7 +119,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.shpp.mentoring.okushin.task2.App</mainClass>
+                            <mainClass>com.shpp.mentoring.okushin.task3.App</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Class-Path>firstApp-1.0-SNAPSHOT-jar-with-dependencies.jar</Class-Path>

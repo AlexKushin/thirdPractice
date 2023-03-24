@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
@@ -80,8 +79,8 @@
       <recent name="com.shpp.mentoring.okushin.task2" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ActiveMqManagerTest.testCreateActiveMQSession">
-    <configuration name="com.shpp.mentoring.okushin.task3.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.com.shpp.mentoring.okushin.task3.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.App" />
       <module name="thirdPractice" />
       <extension name="coverage">
@@ -109,7 +108,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ActiveMqManagerTest.testCreateActiveMQSession" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MessageManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="thirdPractice" />
       <extension name="coverage">
         <pattern>
@@ -118,14 +117,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
-      <option name="METHOD_NAME" value="testCreateActiveMQSession" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.MessageManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MessageManagerTest.testSendMessagesToQueue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.MessageManagerTest" />
+      <option name="METHOD_NAME" value="testSendMessagesToQueue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ActiveMqManagerTest.testCreateNewConnectionForConsumer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StringGeneratorTest.testRandomString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="thirdPractice" />
       <extension name="coverage">
         <pattern>
@@ -134,24 +148,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
-      <option name="METHOD_NAME" value="testCreateNewConnectionForConsumer" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ActiveMqManagerTest.testCreateNewConnectionForProducer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="thirdPractice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
-      <option name="METHOD_NAME" value="testCreateNewConnectionForProducer" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.StringGeneratorTest" />
+      <option name="METHOD_NAME" value="testRandomString(java.lang.String)" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,10 +157,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateActiveMQSession" />
-        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateNewConnectionForConsumer" />
-        <item itemvalue="JUnit.ActiveMqManagerTest.testCreateNewConnectionForProducer" />
         <item itemvalue="Application.com.shpp.mentoring.okushin.task3.App" />
+        <item itemvalue="JUnit.MessageManagerTest.testSendMessagesToQueue" />
+        <item itemvalue="JUnit.StringGeneratorTest.testRandomString" />
+        <item itemvalue="JUnit.MessageManagerTest" />
         <item itemvalue="JUnit.ActiveMqManagerTest" />
       </list>
     </recent_temporary>
@@ -183,12 +181,20 @@
       <option name="project" value="LOCAL" />
       <updated>1678996853348</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed activeMqManagerTests&#10;start write two threads for parallel sending and receiving">
+      <created>1679579230071</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679579230071</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;" />
+    <MESSAGE value="fixed activeMqManagerTests&#10;start write two threads for parallel sending and receiving" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed activeMqManagerTests&#10;start write two threads for parallel sending and receiving" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
