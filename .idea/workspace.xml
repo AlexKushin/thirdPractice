@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newInvalidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newInvalidFile.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newValidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newValidFile.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Error.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/MessageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/MessageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/MessagesToCsvWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" afterDir="false" />
-    </list>
+    <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,20 +45,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;com.shpp.mentoring.okushin.task3.StringGenerator&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/workspace/firstPractice&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "com.shpp.mentoring.okushin.task3.StringGenerator",
+    "last_opened_file_path": "C:/workspace/firstPractice",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\thirdPractice\src\main\java\com\shpp\mentoring\okushin\exceptions" />
@@ -212,14 +201,22 @@
       <option name="project" value="LOCAL" />
       <updated>1679619348469</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed">
+      <created>1679621231649</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679621231649</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created send messages stream&#10;created receive message stream&#10;poison pill&#10;validation&#10;write to csv files via &quot;Writer.append()&quot;" />
     <MESSAGE value="fixed activeMqManagerTests&#10;start write two threads for parallel sending and receiving" />
     <MESSAGE value="created 2 new class which extend Thread&#10;created method createConnectionForAll() and closeAllConnections in ActiveMqManager class&#10;changed order of creating and closing connections for producer and consumer" />
-    <option name="LAST_COMMIT_MESSAGE" value="created 2 new class which extend Thread&#10;created method createConnectionForAll() and closeAllConnections in ActiveMqManager class&#10;changed order of creating and closing connections for producer and consumer" />
+    <MESSAGE value="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
