@@ -11,7 +11,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.time.LocalDateTime;
 import java.util.Properties;
-import java.util.stream.Stream;
 
 public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
@@ -29,7 +28,6 @@ public class App {
             messagesAmount = 1000;
         }
 
-
         PropertyManager pm = new PropertyManager();
         Properties prop = new Properties();
         pm.readPropertyFile("config.properties", prop);
@@ -40,50 +38,16 @@ public class App {
         ConnectionFactory connectionFactory =
                 new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
         ActiveMqManager amqManager = new ActiveMqManager(connectionFactory);
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         POJOMessage poisonPillPojo = new POJOMessage("poison pill", LocalDateTime.now());
 
-        /*Sender sender = new Sender(amqManager,queueName,messagesAmount,timeLimit,poisonPillPojo);
-        Receiver receiver = new Receiver(poisonPillPojo, amqManager, queueName, validator);
-        sender.run();
-
-        receiver.run();
-
-         */
         Sender sendThread = new Sender(amqManager,queueName,messagesAmount,timeLimit,poisonPillPojo);
-        Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, queueName, validator);
+        Receiver receiveThread = new Receiver(poisonPillPojo, amqManager,  validator);
+
         sendThread.start();
-
         receiveThread.start();
-        System.out.println(sendThread.isInterrupted()+" "+receiveThread.isInterrupted());
-
-
-
-
-
-        /*amqManager.createNewConnectionForProducer(queueName);
-        logger.debug("connection for PRODUCER is created");
-
-        MessageManager messageManager = new MessageManager();
-        LocalDateTime startGeneratingTime = LocalDateTime.now();
-        messageManager.sendMessagesToQueue(amqManager, messagesAmount, startGeneratingTime, timeLimit, poisonPillPojo);
-
-        amqManager.closeProducerConnection();
-        logger.debug("connection for PRODUCER is closed");
-
-        amqManager.createNewConnectionForConsumer(queueName);
-        logger.debug("connection for CONSUMER is created");
-
-
-        Stream<POJOMessage> messageStream =
-                messageManager.receiveMessagesFromQueue(amqManager, poisonPillPojo);
-
-        messageManager.writeToCsvValidatedMessages(messageStream, validator);
-        amqManager.closeConsumerConnection();
-        logger.debug("connection for CONSUMER is closed");
-
-         */
 
     }
 }

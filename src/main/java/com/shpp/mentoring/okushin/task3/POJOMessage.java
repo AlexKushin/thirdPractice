@@ -29,8 +29,8 @@ public class POJOMessage implements Serializable {
     }
 
     public POJOMessage(String name, LocalDateTime createdAtTime) {
-        if(!name.equals("poison pill")) {
-            total += 1;
+        if (!name.equals("poison pill")) {
+            total++;
         }
         this.name = name;
         this.createdAtTime = createdAtTime;
@@ -51,6 +51,7 @@ public class POJOMessage implements Serializable {
     public int getCount() {
         return count;
     }
+
     public static int getTotal() {
         return total;
     }

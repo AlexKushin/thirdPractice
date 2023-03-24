@@ -17,43 +17,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class MessageManager {
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
-  //  POJOMessage poisonPillPojo;
+    private static final Logger logger = LoggerFactory.getLogger(MessageManager.class);
 
-
-   /* public void sendMessagesToQueue(ActiveMqManager manager, int amount, LocalDateTime startGeneratingTime, long timeLimit
-            ,POJOMessage poisonPillPojo) {
-        long startTime = System.currentTimeMillis();
-        Stream.generate(() -> new POJOMessage(StringGenerator.randomString(), LocalDateTime.now()))
-                .takeWhile(b -> LocalDateTime.now().isBefore(startGeneratingTime.plusSeconds(timeLimit))).limit(amount).
-                forEach(manager::pushNewMessageToQueue);
-         //poisonPillPojo = new POJOMessage("poison pill", LocalDateTime.now());
-        manager.pushNewMessageToQueue(poisonPillPojo);
-        long endTime = System.currentTimeMillis();
-        double elapsedSeconds = (endTime - startTime) / 1000.0;
-        double messagesPerSecond = amount / elapsedSeconds;
-        logger.info("Sending speed: " + messagesPerSecond + " messages per second");
-    }
-
-    public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager,POJOMessage poisonPillPojo) {
-        return Stream.generate(() -> {
-
-                    Message message = manager.pullNewMessageQueue();
-                    if (message == null) {
-                        return null;
-                    }
-                    ObjectMessage objectMessage = (ObjectMessage) message;
-                    try {
-                        return (POJOMessage) objectMessage.getObject();
-                    } catch (JMSException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .takeWhile(Objects::nonNull).takeWhile(m->!m.equals(poisonPillPojo));
-
-    }
-
-    */
 
     public static void writeToCsvValidatedMessages(Stream<POJOMessage> messageStream, Validator validator) {
         ObjectMapper mapper = new CsvMapper().findAndRegisterModules();

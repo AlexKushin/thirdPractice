@@ -11,34 +11,35 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Receiver extends Thread {
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
-    POJOMessage poisonPillPojo;
-    ActiveMqManager manager;
-    String queueName;
-    Validator validator;
+    private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
+    private final POJOMessage poisonPillPojo;
+    private final ActiveMqManager manager;
 
-    public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager, String queueName,  Validator validator ) {
+    private final Validator validator;
+
+    public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager,  Validator validator ) {
         this.poisonPillPojo = poisonPillPojo;
         this.manager = manager;
-        this.queueName = queueName;
         this.validator =validator;
     }
 
     @Override
     public void run() {
-
         long startTime = System.currentTimeMillis();
-        //manager.createNewConnectionForConsumer(queueName);
+
         Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager,poisonPillPojo);
         MessageManager.writeToCsvValidatedMessages(messageStream, validator);
+
         long endTime = System.currentTimeMillis();
         double elapsedSeconds = (endTime - startTime) / 1000.0;
         double messagesPerSecond = POJOMessage.getTotal() / elapsedSeconds;
-        logger.info("Receiving speed: " + messagesPerSecond + " messages per second");
+
+        logger.info("Receiving speed: {} messages per second",messagesPerSecond);
+
         manager.closeAllConnections();
+
         interrupt();
-        //manager.closeProducerConnection();
-        //manager.closeConsumerConnection();
+
     }
 
     public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {

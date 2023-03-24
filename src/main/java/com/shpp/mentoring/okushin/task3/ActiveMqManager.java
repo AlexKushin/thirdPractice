@@ -16,7 +16,6 @@ public class ActiveMqManager {
     private Session session;
 
     public ActiveMqManager() {
-
     }
 
     public ActiveMqManager(ConnectionFactory activeMQConnectionFactory) {
@@ -26,7 +25,6 @@ public class ActiveMqManager {
 
     public Session createActiveMQSession() {
         try {
-
             connection = connectionFactory.createConnection();
             connection.start();
             return connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
