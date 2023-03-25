@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="" />
+    <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/InvalidMessageTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/MessageManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/SenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newInvalidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newInvalidFile.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newValidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newValidFile.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/InvalidMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/InvalidMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/StringGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/StringGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/ActiveMqManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/ActiveMqManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/StringGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/StringGeneratorTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -52,7 +68,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "com.shpp.mentoring.okushin.task3.StringGenerator",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "com.shpp.mentoring.okushin.task3.MessageManager",
     "last_opened_file_path": "C:/workspace/firstPractice",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -67,8 +83,10 @@
       <recent name="C:\workspace\thirdPractice\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
-      <recent name="com.shpp.mentoring.okushin.task3.StringGenerator" />
       <recent name="com.shpp.mentoring.okushin.task3.MessageManager" />
+      <recent name="com.shpp.mentoring.okushin.task3.InvalidMessage" />
+      <recent name="com.shpp.mentoring.okushin.task3.Sender" />
+      <recent name="com.shpp.mentoring.okushin.task3.StringGenerator" />
       <recent name="com.shpp.mentoring.okushin.task3.ActiveMqManager" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -78,20 +96,7 @@
       <recent name="com.shpp.mentoring.okushin.task2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.App" />
-      <module name="thirdPractice" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.StringGeneratorTest">
     <configuration name="ActiveMqManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="thirdPractice" />
       <extension name="coverage">
@@ -102,6 +107,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
       <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.ActiveMqManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InvalidMessageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="thirdPractice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shpp.mentoring.okushin.task3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.InvalidMessageTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,7 +142,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MessageManagerTest.testSendMessagesToQueue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SenderTest.testSendMessagesToQueue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="thirdPractice" />
       <extension name="coverage">
         <pattern>
@@ -131,14 +151,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
-      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.MessageManagerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.SenderTest" />
       <option name="METHOD_NAME" value="testSendMessagesToQueue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StringGeneratorTest.testRandomString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StringGeneratorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="thirdPractice" />
       <extension name="coverage">
         <pattern>
@@ -148,18 +168,17 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.shpp.mentoring.okushin.task3" />
       <option name="MAIN_CLASS_NAME" value="com.shpp.mentoring.okushin.task3.StringGeneratorTest" />
-      <option name="METHOD_NAME" value="testRandomString(java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.MessageManagerTest.testSendMessagesToQueue" />
-        <item itemvalue="JUnit.StringGeneratorTest.testRandomString" />
+        <item itemvalue="JUnit.StringGeneratorTest" />
+        <item itemvalue="JUnit.SenderTest.testSendMessagesToQueue" />
         <item itemvalue="JUnit.MessageManagerTest" />
+        <item itemvalue="JUnit.InvalidMessageTest" />
         <item itemvalue="JUnit.ActiveMqManagerTest" />
       </list>
     </recent_temporary>
@@ -208,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679621231649</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="exceptions added">
+      <created>1679621388948</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679621388948</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -216,10 +242,32 @@
     <MESSAGE value="fixed activeMqManagerTests&#10;start write two threads for parallel sending and receiving" />
     <MESSAGE value="created 2 new class which extend Thread&#10;created method createConnectionForAll() and closeAllConnections in ActiveMqManager class&#10;changed order of creating and closing connections for producer and consumer" />
     <MESSAGE value="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed" />
+    <MESSAGE value="exceptions added" />
+    <option name="LAST_COMMIT_MESSAGE" value="exceptions added" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$App.ic" NAME="App Coverage Results" MODIFIED="1679711929922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testCloseProducerConnection.ic" NAME="ActiveMqManagerTest.testCloseProducerConnection Coverage Results" MODIFIED="1679662201643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest.ic" NAME="ActiveMqManagerTest Coverage Results" MODIFIED="1679662271853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testCreateActiveMQSession.ic" NAME="ActiveMqManagerTest.testCreateActiveMQSession Coverage Results" MODIFIED="1679658987625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$StringGeneratorTest_testRandomString.ic" NAME="StringGeneratorTest.testRandomString Coverage Results" MODIFIED="1679659058996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$InvalidMessageTest_testGetName.ic" NAME="InvalidMessageTest.testGetName Coverage Results" MODIFIED="1679670639747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/thirdPractice$MessageManagerTest_validMessagesLengthTest.ic" NAME="MessageManagerTest.validMessagesLengthTest Coverage Results" MODIFIED="1679711315869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.shpp.mentoring.okushin.task3.*</FILTER>
     </SUITE>
   </component>

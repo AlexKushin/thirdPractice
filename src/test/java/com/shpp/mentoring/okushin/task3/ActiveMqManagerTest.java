@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 import javax.jms.*;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 
-public class ActiveMqManagerTest extends ActiveMqManager {
+class ActiveMqManagerTest extends ActiveMqManager {
 
     ConnectionFactory connectionFactoryTest = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
 
@@ -22,7 +20,7 @@ public class ActiveMqManagerTest extends ActiveMqManager {
     Connection connection;
     MessageProducer producer;
     MessageProducer pr;
-    MessageConsumer messageConsumer;
+    MessageConsumer consumer;
     Destination destination;
     Session session;
     POJOMessage message;
@@ -36,12 +34,10 @@ public class ActiveMqManagerTest extends ActiveMqManager {
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         destination = session.createQueue("queueTest");
         producer = session.createProducer(destination);
-        messageConsumer = session.createConsumer(destination);
+        consumer = session.createConsumer(destination);
 
         message = new POJOMessage("Sasha", LocalDateTime.now());
         objectMessage = session.createObjectMessage(message);
-        //System.out.println(producer.getPriority());
-      //  System.out.println(pr.getPriority());
 
 
     }
@@ -52,54 +48,97 @@ public class ActiveMqManagerTest extends ActiveMqManager {
         connection.close();
         session.close();
         producer.close();
-        messageConsumer.close();
+        consumer.close();
 
     }
 
     @Test
-    public void testCreateActiveMQSession() throws JMSException {
+    void testCreateActiveMQSession() {
 
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-
-        assertNotEquals(null,activeMqManager.createActiveMQSession());
+        assertNotEquals(null, activeMqManager.createActiveMQSession());
 
 
     }
 
     @Test
-    public void testCreateNewConnectionForProducer() throws JMSException {
+    void testCreateNewConnectionForProducer() {
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
         activeMqManager.createNewConnectionForProducer("test");
-        assertNotEquals(null,activeMqManager.getProducer());
-
-
+        assertNotEquals(null, activeMqManager.getProducer());
+        assertFalse(activeMqManager.isProducerConnectionIsClosed());
 
     }
 
     @Test
-    public void testCreateNewConnectionForConsumer() {
+    void testCreateNewConnectionForConsumer() {
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
         activeMqManager.createNewConnectionForConsumer("test");
-        assertNotEquals(null,activeMqManager.getMessageConsumer());
+        assertNotEquals(null, activeMqManager.getConsumer());
+        assertFalse(activeMqManager.isConsumerConnectionIsClosed());
     }
 
-   /* @Test
-    public void testPushAndPollMessage() throws JMSException {
+    @Test
+    void testCreateNewConnectionForAll() {
+        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
+        activeMqManager.createNewConnectionForAll("test");
+        assertNotEquals(null, activeMqManager.getProducer());
+        assertNotEquals(null, activeMqManager.getConsumer());
+        assertFalse(activeMqManager.isAllConnectionsAreClosed());
+
+    }
+
+    @Test
+    void testCloseProducerConnection() {
+        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
+        activeMqManager.createNewConnectionForProducer("test");
+        assertNotEquals(null, activeMqManager.getProducer());
+
+        activeMqManager.closeProducerConnection();
+        assertTrue(activeMqManager.isProducerConnectionIsClosed());
+
+    }
+
+    @Test
+    void testCloseConsumerConnection() {
+        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
+        activeMqManager.createNewConnectionForConsumer("test");
+        assertNotEquals(null, activeMqManager.getConsumer());
+
+        activeMqManager.closeConsumerConnection();
+
+        assertTrue(activeMqManager.isConsumerConnectionIsClosed());
+    }
+
+    @Test
+    void testCloseConnectionForAll() {
+        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
+        activeMqManager.createNewConnectionForAll("test");
+
+        assertNotEquals(null, activeMqManager.getProducer());
+        assertNotEquals(null, activeMqManager.getConsumer());
+        assertFalse(activeMqManager.isAllConnectionsAreClosed());
+
+        activeMqManager.closeAllConnections();
+
+        assertTrue(activeMqManager.isAllConnectionsAreClosed());
+    }
+
+
+    @Test
+    void testPushAndPollMessage() throws JMSException {
 
         producer.send(objectMessage);
-
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createActiveMQSession();
-        activeMqManager.createNewConnectionForProducer("queue");
-        activeMqManager.pushNewMessageToQueue(message);
-        activeMqManager.createNewConnectionForConsumer("queue");
-
-        Message m1 = messageConsumer.receive(1000);
+        Message m1 = consumer.receive(1000);
         ObjectMessage objM1 = (ObjectMessage) m1;
         POJOMessage pojoMessage1 = (POJOMessage) objM1.getObject();
 
+        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
+        activeMqManager.createActiveMQSession();
+        activeMqManager.createNewConnectionForAll("queue");
+        activeMqManager.pushNewMessageToQueue(message);
         Message m2 = activeMqManager.pullNewMessageQueue();
-
+        activeMqManager.closeAllConnections();
 
         ObjectMessage objM2 = (ObjectMessage) m2;
         POJOMessage pojoMessage2 = (POJOMessage) objM2.getObject();
@@ -107,8 +146,6 @@ public class ActiveMqManagerTest extends ActiveMqManager {
         assertEquals(pojoMessage1.getName(), pojoMessage2.getName());
         assertEquals(pojoMessage1.getCreatedAtTime(), pojoMessage2.getCreatedAtTime());
     }
-
-    */
 
 
 }

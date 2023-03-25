@@ -1,11 +1,16 @@
 package com.shpp.mentoring.okushin.task3;
+
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @JsonPropertyOrder({"name", "count", "error"})
 public class InvalidMessage {
-    String name;
-    int count;
-    String error;
+    private String name;
+    private int count;
+    private String error;
 
+
+    public InvalidMessage() {
+    }
 
     public InvalidMessage(String name, int count, String error) {
         this.name = name;
@@ -24,4 +29,5 @@ public class InvalidMessage {
     public String getError() {
         return error;
     }
+
 }

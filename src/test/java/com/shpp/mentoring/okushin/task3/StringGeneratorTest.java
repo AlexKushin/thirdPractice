@@ -16,6 +16,7 @@ class StringGeneratorTest extends StringGenerator {
             "b",
             "asdfg"
     })
+    //run test a few times and compare with came string every time
     void testRandomString(String str) {
 
         assertNotEquals(str, StringGenerator.randomString());

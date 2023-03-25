@@ -17,24 +17,25 @@ public class Receiver extends Thread {
 
     private final Validator validator;
 
-    public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager,  Validator validator ) {
+    public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager, Validator validator) {
         this.poisonPillPojo = poisonPillPojo;
         this.manager = manager;
-        this.validator =validator;
+        this.validator = validator;
     }
 
     @Override
     public void run() {
         long startTime = System.currentTimeMillis();
 
-        Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager,poisonPillPojo);
+        Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
+
         MessageManager.writeToCsvValidatedMessages(messageStream, validator);
 
         long endTime = System.currentTimeMillis();
         double elapsedSeconds = (endTime - startTime) / 1000.0;
         double messagesPerSecond = POJOMessage.getTotal() / elapsedSeconds;
 
-        logger.info("Receiving speed: {} messages per second",messagesPerSecond);
+        logger.info("Receiving speed: {} messages per second", messagesPerSecond);
 
         manager.closeAllConnections();
 
@@ -59,9 +60,6 @@ public class Receiver extends Thread {
                     }
                 })
                 .takeWhile(Objects::nonNull).takeWhile(m -> !m.equals(poisonPillPojo));
-
-
-
 
     }
 }

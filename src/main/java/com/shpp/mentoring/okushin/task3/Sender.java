@@ -8,12 +8,14 @@ import java.util.stream.Stream;
 
 public class Sender extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
-    private final POJOMessage poisonPillPojo;
-    private final ActiveMqManager manager;
-    private final String queueName;
-    private final int amount;
-    private final long timeLimit;
+    private POJOMessage poisonPillPojo;
+    private ActiveMqManager manager;
+    private String queueName;
+    private int amount;
+    private long timeLimit;
 
+    public Sender() {
+    }
 
     public Sender(ActiveMqManager manager, String queueName, int amount, long timeLimit, POJOMessage poisonPillPojo) {
         this.manager = manager;

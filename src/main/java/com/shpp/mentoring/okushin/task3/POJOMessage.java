@@ -3,10 +3,7 @@ package com.shpp.mentoring.okushin.task3;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -61,8 +58,7 @@ public class POJOMessage implements Serializable {
         return createdAtTime;
     }
 
-
-    public void setCreatedAtTime(LocalDateTime createdAtTime) {
-        this.createdAtTime = createdAtTime;
+    public static void setTotalToZero() {
+        total = 0;
     }
 }

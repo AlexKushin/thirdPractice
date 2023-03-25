@@ -43,8 +43,8 @@ public class App {
         Validator validator = factory.getValidator();
         POJOMessage poisonPillPojo = new POJOMessage("poison pill", LocalDateTime.now());
 
-        Sender sendThread = new Sender(amqManager,queueName,messagesAmount,timeLimit,poisonPillPojo);
-        Receiver receiveThread = new Receiver(poisonPillPojo, amqManager,  validator);
+        Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
+        Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, validator);
 
         sendThread.start();
         receiveThread.start();
