@@ -20,7 +20,7 @@ class SenderTest extends Sender {
     void testRun() {
     }
 
-   /* @Test
+   @Test
     void testSendMessagesToQueue() {
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
         activeMqManager.createNewConnectionForProducer("test");
@@ -30,7 +30,7 @@ class SenderTest extends Sender {
                 sendMessagesToQueue(activeMqManager, 1000, LocalDateTime.now(), 7);
         Sender sender1 = new Sender();
     }
-    
-    */
+
+
 
 }

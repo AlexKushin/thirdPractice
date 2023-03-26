@@ -8,6 +8,7 @@ import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.validation.Validator;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class Receiver extends Thread {
@@ -25,29 +26,20 @@ public class Receiver extends Thread {
 
     @Override
     public void run() {
-        long startTime = System.currentTimeMillis();
+        manager.createNewConnectionForConsumer("IN-queue");
 
         Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
 
         MessageManager.writeToCsvValidatedMessages(messageStream, validator);
 
-        long endTime = System.currentTimeMillis();
-        double elapsedSeconds = (endTime - startTime) / 1000.0;
-        double messagesPerSecond = POJOMessage.getTotal() / elapsedSeconds;
-
-        logger.info("Receiving speed: {} messages per second", messagesPerSecond);
-
-        manager.closeAllConnections();
+        manager.closeConsumerConnection();
 
         interrupt();
 
     }
 
     public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
-
-
         return Stream.generate(() -> {
-
                     Message message = manager.pullNewMessageQueue();
                     if (message == null) {
                         return null;

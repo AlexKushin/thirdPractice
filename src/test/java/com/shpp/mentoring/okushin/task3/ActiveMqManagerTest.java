@@ -36,7 +36,7 @@ class ActiveMqManagerTest extends ActiveMqManager {
         producer = session.createProducer(destination);
         consumer = session.createConsumer(destination);
 
-        message = new POJOMessage("Sasha", LocalDateTime.now());
+        message = new POJOMessage("Sasha",7, LocalDateTime.now());
         objectMessage = session.createObjectMessage(message);
 
 
@@ -56,7 +56,7 @@ class ActiveMqManagerTest extends ActiveMqManager {
     void testCreateActiveMQSession() {
 
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        assertNotEquals(null, activeMqManager.createActiveMQSession());
+        assertNotEquals(null, activeMqManager.createActiveMQSessionForProducer());
 
 
     }
@@ -134,7 +134,7 @@ class ActiveMqManagerTest extends ActiveMqManager {
         POJOMessage pojoMessage1 = (POJOMessage) objM1.getObject();
 
         ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createActiveMQSession();
+        activeMqManager.createActiveMQSessionForProducer();
         activeMqManager.createNewConnectionForAll("queue");
         activeMqManager.pushNewMessageToQueue(message);
         Message m2 = activeMqManager.pullNewMessageQueue();

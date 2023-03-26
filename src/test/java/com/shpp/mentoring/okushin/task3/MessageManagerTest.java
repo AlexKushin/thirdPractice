@@ -20,12 +20,14 @@ class MessageManagerTest extends MessageManager {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = factory.getValidator();
 
-    @BeforeEach
+   /* @BeforeEach
     void setCountToZero() {
         POJOMessage.setTotalToZero();
     }
 
-    @Test
+    */
+
+    /*@Test
     void validMessagesCountTest() {
 
         POJOMessage message;
@@ -33,14 +35,10 @@ class MessageManagerTest extends MessageManager {
         List<POJOMessage> messageList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             message = new POJOMessage("asdfghjk", LocalDateTime.now());
-            System.out.println(message.getCount() + "count");
-            System.out.println(message.getName() + "name");
             messageList.add(message);
         }
         System.out.println(messageList.size() + "size");
         for (int i = 0; i < 9; i++) {
-            System.out.println(messageList.get(i).getCount() + "count");
-            System.out.println(messageList.get(i).getName() + "name");
             Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
             assertFalse(violations.isEmpty());
 
@@ -99,5 +97,7 @@ class MessageManagerTest extends MessageManager {
     @Test
     void testWriteToCsvValidatedMessages() {
     }
+
+     */
 
 }

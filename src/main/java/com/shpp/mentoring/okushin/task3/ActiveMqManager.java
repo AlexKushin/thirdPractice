@@ -1,5 +1,6 @@
 package com.shpp.mentoring.okushin.task3;
 
+import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,12 +9,17 @@ import javax.jms.*;
 public class ActiveMqManager {
     private static final Logger loggerAMqM = LoggerFactory.getLogger(ActiveMqManager.class);
     private ConnectionFactory connectionFactory;
-    private Connection connection;
+    private final PooledConnectionFactory pooledConnectionFactory = new PooledConnectionFactory();
+    private Connection producerConnection;
+    private Connection consumerConnection;
     private MessageProducer producer;
 
     private MessageConsumer consumer;
-    private Destination destination;
-    private Session session;
+    private Destination producerDestination;
+    private Destination consumerDestination;
+    private Session producerSession;
+    private Session consumerSession;
+
 
     private boolean producerConnectionIsClosed = true;
     private boolean consumerConnectionIsClosed = true;
@@ -24,14 +30,29 @@ public class ActiveMqManager {
 
     public ActiveMqManager(ConnectionFactory activeMQConnectionFactory) {
         connectionFactory = activeMQConnectionFactory;
+
+        pooledConnectionFactory.setConnectionFactory(activeMQConnectionFactory);
+        pooledConnectionFactory.setMaxConnections(10);
     }
 
 
-    public Session createActiveMQSession() {
+    public Session createActiveMQSessionForProducer() {
         try {
-            connection = connectionFactory.createConnection();
-            connection.start();
-            return connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            producerConnection = pooledConnectionFactory.createConnection();
+            producerConnection.start();
+
+            return producerConnection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        } catch (JMSException e) {
+            loggerAMqM.error("Can't create session {}", e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Session createActiveMQSessionForConsumer() {
+        try {
+            consumerConnection = connectionFactory.createConnection();
+            consumerConnection.start();
+            return consumerConnection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         } catch (JMSException e) {
             loggerAMqM.error("Can't create session {}", e.getMessage(), e);
             throw new RuntimeException(e);
@@ -40,9 +61,10 @@ public class ActiveMqManager {
 
     public void createNewConnectionForProducer(String queueName) {
         try {
-            session = createActiveMQSession();
-            destination = session.createQueue(queueName);
-            producer = session.createProducer(destination);
+            producerSession = createActiveMQSessionForProducer();
+            producerDestination = producerSession.createQueue(queueName);
+            producer = producerSession.createProducer(producerDestination);
+            producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
             producerConnectionIsClosed = false;
         } catch (JMSException e) {
             throw new RuntimeException();
@@ -52,9 +74,10 @@ public class ActiveMqManager {
 
     public void closeProducerConnection() {
         try {
-            connection.close();
-            session.close();
             producer.close();
+            producerSession.close();
+            producerConnection.close();
+            pooledConnectionFactory.clear();
             producerConnectionIsClosed = true;
         } catch (JMSException e) {
             throw new RuntimeException(e);
@@ -64,9 +87,9 @@ public class ActiveMqManager {
 
     public void createNewConnectionForConsumer(String queueName) {
         try {
-            session = createActiveMQSession();
-            destination = session.createQueue(queueName);
-            consumer = session.createConsumer(destination);
+            consumerSession= createActiveMQSessionForConsumer();
+            consumerDestination = consumerSession.createQueue(queueName);
+            consumer = consumerSession.createConsumer(consumerDestination);
             consumerConnectionIsClosed = false;
         } catch (JMSException e) {
             throw new RuntimeException(e);
@@ -75,9 +98,9 @@ public class ActiveMqManager {
 
     public void closeConsumerConnection() {
         try {
-            connection.close();
-            session.close();
             consumer.close();
+            consumerSession.close();
+            consumerConnection.close();
             consumerConnectionIsClosed = true;
         } catch (JMSException e) {
             throw new RuntimeException();
@@ -85,34 +108,25 @@ public class ActiveMqManager {
     }
 
     public void createNewConnectionForAll(String queueName) {
-        try {
-            session = createActiveMQSession();
-            destination = session.createQueue(queueName);
-            producer = session.createProducer(destination);
-            consumer = session.createConsumer(destination);
-            allConnectionsAreClosed = false;
-        } catch (JMSException e) {
-            throw new RuntimeException();
-        }
+        createNewConnectionForProducer(queueName);
+
+        createNewConnectionForConsumer(queueName);
+
+
+        allConnectionsAreClosed = false;
 
     }
 
     public void closeAllConnections() {
-        try {
-            connection.close();
-            session.close();
-            producer.close();
-            consumer.close();
-            allConnectionsAreClosed = true;
-        } catch (JMSException e) {
-            throw new RuntimeException();
-        }
+        closeProducerConnection();
+        closeConsumerConnection();
+        allConnectionsAreClosed = true;
     }
 
     public void pushNewMessageToQueue(POJOMessage message) {
         ObjectMessage objectMessage;
         try {
-            objectMessage = session.createObjectMessage(message);
+            objectMessage = producerSession.createObjectMessage(message);
             producer.send(objectMessage);
         } catch (JMSException e) {
             throw new RuntimeException(e);

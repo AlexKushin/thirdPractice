@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @JsonPropertyOrder({"name", "count"})
 public class POJOMessage implements Serializable {
@@ -16,7 +17,8 @@ public class POJOMessage implements Serializable {
 
 
     private LocalDateTime createdAtTime;
-    private static int total = 0;
+
+    private static AtomicInteger total = new AtomicInteger(0) ;
 
 
     @Min(value = 10, message = "Count should not be less than 10")
@@ -25,14 +27,16 @@ public class POJOMessage implements Serializable {
     public POJOMessage() {
     }
 
-    public POJOMessage(String name, LocalDateTime createdAtTime) {
+
+
+    public POJOMessage(String name, int count, LocalDateTime createdAtTime) {
         if (!name.equals("poison pill")) {
-            total++;
+            total.incrementAndGet();
         }
         this.name = name;
         this.createdAtTime = createdAtTime;
 
-        this.count = total;
+        this.count = total.get();
 
     }
 
@@ -44,21 +48,20 @@ public class POJOMessage implements Serializable {
         this.name = name;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
 
     public int getCount() {
         return count;
     }
 
-    public static int getTotal() {
-        return total;
-    }
 
     @JsonIgnore
     public LocalDateTime getCreatedAtTime() {
         return createdAtTime;
     }
 
-    public static void setTotalToZero() {
-        total = 0;
-    }
+
 }

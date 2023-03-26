@@ -22,32 +22,41 @@ public class App {
             try {
                 messagesAmount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                messagesAmount = 1000;
+                messagesAmount = 100000;
             }
         } else {
-            messagesAmount = 1000;
+            messagesAmount = 100000;
         }
 
         PropertyManager pm = new PropertyManager();
         Properties prop = new Properties();
         pm.readPropertyFile("config.properties", prop);
-        //??
+
         long timeLimit = Long.parseLong(PropertyManager.getStringPropertiesValue("poisonPillSec", prop));
         String queueName = PropertyManager.getStringPropertiesValue("queueName", prop);
 
-        ConnectionFactory connectionFactory =
-                new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
+        String url = PropertyManager.getStringPropertiesValue("brokerURL", prop);
+        String userName = PropertyManager.getStringPropertiesValue("userName", prop);
+        String password = PropertyManager.getStringPropertiesValue("password", prop);
+
+
+    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
+       //ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
+
+        connectionFactory.setUserName(userName);
+        connectionFactory.setPassword(password);
         ActiveMqManager amqManager = new ActiveMqManager(connectionFactory);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
-        POJOMessage poisonPillPojo = new POJOMessage("poison pill", LocalDateTime.now());
+        POJOMessage poisonPillPojo = new POJOMessage("poison pill",-1 ,LocalDateTime.now());
 
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
         Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, validator);
 
         sendThread.start();
         receiveThread.start();
+        //finally closeAllConnections
 
     }
 }
