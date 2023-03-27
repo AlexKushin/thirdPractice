@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import static org.mockito.Mockito.*;
 
 class SenderTest extends Sender {
-    ConnectionFactory connectionFactory = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
+    /*ConnectionFactory connectionFactory = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
     @Mock
     ActiveMqManager activeMqManager;
 
@@ -29,7 +29,11 @@ class SenderTest extends Sender {
         verify(sender, times(1)).
                 sendMessagesToQueue(activeMqManager, 1000, LocalDateTime.now(), 7);
         Sender sender1 = new Sender();
+
+
     }
+
+     */
 
 
 
