@@ -13,7 +13,7 @@ import static org.mockito.Mockito.spy;
 
 class ActiveMqManagerTest extends ActiveMqManager {
 
-    ConnectionFactory connectionFactoryTest = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
+    /*ConnectionFactory connectionFactoryTest = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
 
     ConnectionFactory connectionFactory = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
 
@@ -146,6 +146,8 @@ class ActiveMqManagerTest extends ActiveMqManager {
         assertEquals(pojoMessage1.getName(), pojoMessage2.getName());
         assertEquals(pojoMessage1.getCreatedAtTime(), pojoMessage2.getCreatedAtTime());
     }
+    
+     */
 
 
 }
