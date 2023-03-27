@@ -17,6 +17,9 @@ public class App {
 
     public static void main(String[] args) {
 //some changes
+//some changes
+//some changes
+//some changes
         int messagesAmount;
         if (args.length != 0) {
             try {
