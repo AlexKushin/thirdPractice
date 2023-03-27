@@ -42,7 +42,7 @@ public class App {
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 
-
+//i will finish this assignment for tuesday
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
         ActiveMqManager amqManager = new ActiveMqManager(connectionFactory);
