@@ -146,8 +146,6 @@ class ActiveMqManagerTest extends ActiveMqManager {
         assertEquals(pojoMessage1.getName(), pojoMessage2.getName());
         assertEquals(pojoMessage1.getCreatedAtTime(), pojoMessage2.getCreatedAtTime());
     }
-    
-     */
-
+*/
 
 }
