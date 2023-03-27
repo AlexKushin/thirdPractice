@@ -41,7 +41,7 @@ public class App {
 
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
-       
+
 
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);

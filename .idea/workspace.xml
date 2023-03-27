@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newInvalidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newInvalidFile.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newValidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newValidFile.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679869524243</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="no changes&#10;just commit before merge request on GitHub">
+      <created>1679876589963</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679876589963</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -248,7 +251,8 @@
     <MESSAGE value="exceptions added" />
     <MESSAGE value="tests for validator in MessageManagerTest class were added" />
     <MESSAGE value="static field total was deleted from POJOMessage class&#10;added sent messages counter in Sender, received messages counter in Receiver&#10;set up connection to aws activeMq broker" />
-    <option name="LAST_COMMIT_MESSAGE" value="static field total was deleted from POJOMessage class&#10;added sent messages counter in Sender, received messages counter in Receiver&#10;set up connection to aws activeMq broker" />
+    <MESSAGE value="no changes&#10;just commit before merge request on GitHub" />
+    <option name="LAST_COMMIT_MESSAGE" value="no changes&#10;just commit before merge request on GitHub" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
