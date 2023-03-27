@@ -40,8 +40,8 @@ public class App {
         String password = PropertyManager.getStringPropertiesValue("password", prop);
 
 
-    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
-       //ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
+       
 
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
@@ -49,12 +49,13 @@ public class App {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
-        POJOMessage poisonPillPojo = new POJOMessage("poison pill",-1 ,LocalDateTime.now());
+        POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
 
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
         Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, validator);
 
         sendThread.start();
+
         receiveThread.start();
         //finally closeAllConnections
 

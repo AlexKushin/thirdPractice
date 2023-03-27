@@ -6,19 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="51663da5-f143-4847-9029-4db01c3b5b9b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newInvalidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newInvalidFile.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newValidFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/newValidFile.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/ActiveMqManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/MessageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/MessageManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/POJOMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shpp/mentoring/okushin/task3/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/ActiveMqManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/ActiveMqManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/MessageManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/MessageManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/SenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shpp/mentoring/okushin/task3/SenderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +59,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "com.shpp.mentoring.okushin.task3.MessageManager",
-    "last_opened_file_path": "C:/workspace/firstPractice",
+    "last_opened_file_path": "C:/workspace/secondPractice",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -239,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679712369555</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="static field total was deleted from POJOMessage class&#10;added sent messages counter in Sender, received messages counter in Receiver&#10;set up connection to aws activeMq broker">
+      <created>1679869524243</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679869524243</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -249,7 +247,8 @@
     <MESSAGE value="part of sonarLint comments have been performed:&#10;comment lines is deleted&#10;logger messages is changed" />
     <MESSAGE value="exceptions added" />
     <MESSAGE value="tests for validator in MessageManagerTest class were added" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests for validator in MessageManagerTest class were added" />
+    <MESSAGE value="static field total was deleted from POJOMessage class&#10;added sent messages counter in Sender, received messages counter in Receiver&#10;set up connection to aws activeMq broker" />
+    <option name="LAST_COMMIT_MESSAGE" value="static field total was deleted from POJOMessage class&#10;added sent messages counter in Sender, received messages counter in Receiver&#10;set up connection to aws activeMq broker" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thirdPractice$ActiveMqManagerTest_testPushAndPollMessage.ic" NAME="ActiveMqManagerTest.testPushAndPollMessage Coverage Results" MODIFIED="1679396393442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

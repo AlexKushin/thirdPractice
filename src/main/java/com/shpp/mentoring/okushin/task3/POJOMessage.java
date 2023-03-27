@@ -18,9 +18,6 @@ public class POJOMessage implements Serializable {
 
     private LocalDateTime createdAtTime;
 
-    private static AtomicInteger total = new AtomicInteger(0) ;
-
-
     @Min(value = 10, message = "Count should not be less than 10")
     private int count;
 
@@ -30,13 +27,9 @@ public class POJOMessage implements Serializable {
 
 
     public POJOMessage(String name, int count, LocalDateTime createdAtTime) {
-        if (!name.equals("poison pill")) {
-            total.incrementAndGet();
-        }
         this.name = name;
         this.createdAtTime = createdAtTime;
-
-        this.count = total.get();
+        this.count = count;
 
     }
 
