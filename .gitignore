@@ -2,6 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
 C:\workspace\thirdPractice\newInvalidFile.csv
 C:\workspace\thirdPractice\newValidFile.csv
 
