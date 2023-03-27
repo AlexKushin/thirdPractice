@@ -98,6 +98,17 @@
             <version>1.5</version>
         </dependency>
 
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>5.15.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>5.15.8</version>
+            </dependency>
+
     </dependencies>
 
     <build>
@@ -118,7 +129,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.shpp.mentoring.okushin.task2.App</mainClass>
+                            <mainClass>com.shpp.mentoring.okushin.task3.App</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Class-Path>firstApp-1.0-SNAPSHOT-jar-with-dependencies.jar</Class-Path>
