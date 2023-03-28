@@ -1,6 +1,5 @@
 package com.shpp.mentoring.okushin.task3;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
@@ -8,8 +7,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -77,9 +74,7 @@ class MessageManagerTest extends MessageManager {
 
     }
 
-    @Test
-    void testWriteToCsvValidatedMessages() {
-    }
+
 
 
 

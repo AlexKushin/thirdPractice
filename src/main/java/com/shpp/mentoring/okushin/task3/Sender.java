@@ -49,6 +49,8 @@ public class Sender extends Thread {
                 forEach(m -> {
                     total.incrementAndGet();
                     manager.pushNewMessageToQueue(m);
+                    logger.info("POJO message name: {} count: {} createdAtDataTime: {} was sent to queue",
+                            m.getName(),m.getCount(),m.getCreatedAtTime());
                 });
 
         long endTime = System.currentTimeMillis();

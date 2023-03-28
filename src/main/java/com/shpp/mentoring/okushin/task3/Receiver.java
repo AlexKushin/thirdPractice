@@ -9,24 +9,27 @@ import java.util.stream.Stream;
 
 public class Receiver extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
-    private  POJOMessage poisonPillPojo;
+    private POJOMessage poisonPillPojo;
     private ActiveMqManager manager;
+    private String queueName;
+    private Validator validator;
 
-    private  Validator validator;
 
-    public Receiver(){
+    public Receiver() {
 
     }
 
-    public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager, Validator validator) {
+    public Receiver(ActiveMqManager manager, String queueName, Validator validator, POJOMessage poisonPillPojo) {
         this.poisonPillPojo = poisonPillPojo;
         this.manager = manager;
+        this.queueName = queueName;
         this.validator = validator;
     }
 
     @Override
     public void run() {
-        manager.createNewConnectionForConsumer("IN-queue");
+
+        manager.createNewConnectionForConsumer(queueName);
 
         Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
 
@@ -37,6 +40,7 @@ public class Receiver extends Thread {
         interrupt();
 
     }
+
     /*public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
         return Stream.generate(() -> {
                     Message message = manager.pullNewMessageFromQueue();

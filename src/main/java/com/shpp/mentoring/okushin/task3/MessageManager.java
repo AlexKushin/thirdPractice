@@ -37,7 +37,8 @@ public class MessageManager {
              SequenceWriter invalidWriter = csvMapper.writer(invalidSchema).writeValues(new File("newInvalidFile.csv"))) {
             long startTime = System.currentTimeMillis();
             messageStream.forEach(m -> {
-                //  logger.info(m.getName());
+                logger.info("POJO message name: {} count: {} createdAtDateTime: {} was received from queue",
+                        m.getName(),m.getCount(), m.getCreatedAtTime());
                 total.incrementAndGet();
                 Set<ConstraintViolation<POJOMessage>> violations = validator.validate(m);
                 ArrayList<String> errorsList = new ArrayList<>();

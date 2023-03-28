@@ -21,10 +21,10 @@ public class App {
             try {
                 messagesAmount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                messagesAmount = 100000;
+                messagesAmount = 1000;
             }
         } else {
-            messagesAmount = 100000;
+            messagesAmount = 1000;
         }
 
         PropertyManager pm = new PropertyManager();
@@ -49,12 +49,11 @@ public class App {
         POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
 
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
-        Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, validator);
+        Receiver receiveThread = new Receiver( amqManager, queueName, validator,poisonPillPojo);
 
-        sendThread.setPriority(5);
         sendThread.start();
         receiveThread.start();
-        //finally closeAllConnections
+
 
 
     }
