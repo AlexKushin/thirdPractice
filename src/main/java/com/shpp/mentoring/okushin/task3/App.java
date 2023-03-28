@@ -5,7 +5,6 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jms.ConnectionFactory;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -34,7 +33,6 @@ public class App {
 
         long timeLimit = Long.parseLong(PropertyManager.getStringPropertiesValue("poisonPillSec", prop));
         String queueName = PropertyManager.getStringPropertiesValue("queueName", prop);
-
         String url = PropertyManager.getStringPropertiesValue("brokerURL", prop);
         String userName = PropertyManager.getStringPropertiesValue("userName", prop);
         String password = PropertyManager.getStringPropertiesValue("password", prop);
@@ -42,7 +40,6 @@ public class App {
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 
-//i will finish this assignment for tuesday!!!
         connectionFactory.setUserName(userName);
         connectionFactory.setPassword(password);
         ActiveMqManager amqManager = new ActiveMqManager(connectionFactory);
@@ -54,10 +51,11 @@ public class App {
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
         Receiver receiveThread = new Receiver(poisonPillPojo, amqManager, validator);
 
+        sendThread.setPriority(5);
         sendThread.start();
-
         receiveThread.start();
         //finally closeAllConnections
+
 
     }
 }

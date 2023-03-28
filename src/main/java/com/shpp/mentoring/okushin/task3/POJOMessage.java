@@ -3,10 +3,12 @@ package com.shpp.mentoring.okushin.task3;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @JsonPropertyOrder({"name", "count"})
 public class POJOMessage implements Serializable {
@@ -16,14 +18,10 @@ public class POJOMessage implements Serializable {
     private String name;
 
 
-    private LocalDateTime createdAtTime;
+    private final LocalDateTime createdAtTime;
 
     @Min(value = 10, message = "Count should not be less than 10")
     private int count;
-
-    public POJOMessage() {
-    }
-
 
 
     public POJOMessage(String name, int count, LocalDateTime createdAtTime) {

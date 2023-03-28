@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class InvalidMessage {
     private String name;
     private int count;
-    private String error;
+    private String errors;
 
 
     public InvalidMessage() {
@@ -15,7 +15,7 @@ public class InvalidMessage {
     public InvalidMessage(String name, int count, String error) {
         this.name = name;
         this.count = count;
-        this.error = error;
+        this.errors = error;
     }
 
     public String getName() {
@@ -26,8 +26,8 @@ public class InvalidMessage {
         return count;
     }
 
-    public String getError() {
-        return error;
+    public String getErrors() {
+        return errors;
     }
 
 }

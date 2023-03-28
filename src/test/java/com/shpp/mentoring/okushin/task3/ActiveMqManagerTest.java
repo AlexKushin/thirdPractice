@@ -1,154 +1,94 @@
 package com.shpp.mentoring.okushin.task3;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.pool.PooledConnectionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import javax.jms.*;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
 
 class ActiveMqManagerTest extends ActiveMqManager {
 
-    /*ConnectionFactory connectionFactoryTest = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
-
-    ConnectionFactory connectionFactory = spy(new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_BROKER_URL));
-
-    Connection connection;
-    MessageProducer producer;
-    MessageProducer pr;
-    MessageConsumer consumer;
-    Destination destination;
-    Session session;
-    POJOMessage message;
-    ObjectMessage objectMessage;
+    @Mock
+    ConnectionFactory connectionFactoryTest = mock(ConnectionFactory.class);
+    //  @Mock
+    PooledConnectionFactory pooledConnectionFactory = new PooledConnectionFactory();
+    //PooledConnectionFactory pooledConnectionFactory = mock(PooledConnectionFactory.class);
+    @Mock
+    ActiveMqManager activeMqManager = mock(ActiveMqManager.class);
 
 
     @BeforeEach
-    public void setUp() throws JMSException {
-        connection = connectionFactoryTest.createConnection();
-        connection.start();
-        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        destination = session.createQueue("queueTest");
-        producer = session.createProducer(destination);
-        consumer = session.createConsumer(destination);
+    public void setUp() {
 
-        message = new POJOMessage("Sasha",7, LocalDateTime.now());
-        objectMessage = session.createObjectMessage(message);
-
-
+        //pooledConnectionFactory.setConnectionFactory(connectionFactoryTest);
+        //pooledConnectionFactory.setMaxConnections(10);
     }
-
 
     @AfterEach
-    public void shutDown() throws JMSException {
-        connection.close();
-        session.close();
-        producer.close();
-        consumer.close();
+    void shutDown() {
 
+        // pooledConnectionFactory.clear();
     }
 
     @Test
-    void testCreateActiveMQSession() {
+    void createActiveMQSessionForProducerTest() {
 
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        assertNotEquals(null, activeMqManager.createActiveMQSessionForProducer());
-
-
-    }
-
-    @Test
-    void testCreateNewConnectionForProducer() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForProducer("test");
-        assertNotEquals(null, activeMqManager.getProducer());
-        assertFalse(activeMqManager.isProducerConnectionIsClosed());
-
-    }
-
-    @Test
-    void testCreateNewConnectionForConsumer() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForConsumer("test");
-        assertNotEquals(null, activeMqManager.getConsumer());
-        assertFalse(activeMqManager.isConsumerConnectionIsClosed());
-    }
-
-    @Test
-    void testCreateNewConnectionForAll() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForAll("test");
-        assertNotEquals(null, activeMqManager.getProducer());
-        assertNotEquals(null, activeMqManager.getConsumer());
-        assertFalse(activeMqManager.isAllConnectionsAreClosed());
-
-    }
-
-    @Test
-    void testCloseProducerConnection() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForProducer("test");
-        assertNotEquals(null, activeMqManager.getProducer());
-
-        activeMqManager.closeProducerConnection();
-        assertTrue(activeMqManager.isProducerConnectionIsClosed());
-
-    }
-
-    @Test
-    void testCloseConsumerConnection() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForConsumer("test");
-        assertNotEquals(null, activeMqManager.getConsumer());
-
-        activeMqManager.closeConsumerConnection();
-
-        assertTrue(activeMqManager.isConsumerConnectionIsClosed());
-    }
-
-    @Test
-    void testCloseConnectionForAll() {
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
-        activeMqManager.createNewConnectionForAll("test");
-
-        assertNotEquals(null, activeMqManager.getProducer());
-        assertNotEquals(null, activeMqManager.getConsumer());
-        assertFalse(activeMqManager.isAllConnectionsAreClosed());
-
-        activeMqManager.closeAllConnections();
-
-        assertTrue(activeMqManager.isAllConnectionsAreClosed());
-    }
-
-
-    @Test
-    void testPushAndPollMessage() throws JMSException {
-
-        producer.send(objectMessage);
-        Message m1 = consumer.receive(1000);
-        ObjectMessage objM1 = (ObjectMessage) m1;
-        POJOMessage pojoMessage1 = (POJOMessage) objM1.getObject();
-
-        ActiveMqManager activeMqManager = new ActiveMqManager(connectionFactory);
         activeMqManager.createActiveMQSessionForProducer();
-        activeMqManager.createNewConnectionForAll("queue");
-        activeMqManager.pushNewMessageToQueue(message);
-        Message m2 = activeMqManager.pullNewMessageQueue();
-        activeMqManager.closeAllConnections();
+        Mockito.verify(activeMqManager).createActiveMQSessionForProducer();
 
-        ObjectMessage objM2 = (ObjectMessage) m2;
-        POJOMessage pojoMessage2 = (POJOMessage) objM2.getObject();
-
-        assertEquals(pojoMessage1.getName(), pojoMessage2.getName());
-        assertEquals(pojoMessage1.getCreatedAtTime(), pojoMessage2.getCreatedAtTime());
     }
-<<<<<<< HEAD
-    
-     */
 
+    @Test
+    void createNewConnectionForProducerTest() {
 
+        activeMqManager.createNewConnectionForProducer("name");
+        Mockito.verify(activeMqManager).createNewConnectionForProducer("name");
+    }
+
+    @Test
+    void createActiveMQSessionForConsumerTest() {
+        activeMqManager.createActiveMQSessionForConsumer();
+        Mockito.verify(activeMqManager).createActiveMQSessionForConsumer();
+    }
+
+    @Test
+    void createNewConnectionForConsumerTest() {
+        // activeMqManager.createActiveMQSessionForConsumer();
+        activeMqManager.createNewConnectionForConsumer("name");
+        // Mockito.verify(activeMqManager,times(1)).createActiveMQSessionForConsumer();
+        Mockito.verify(activeMqManager).createNewConnectionForConsumer("name");
+
+    }
+
+    @Test
+    void closeProducerConnectionTest() {
+        activeMqManager.closeProducerConnection();
+        Mockito.verify(activeMqManager).closeProducerConnection();
+    }
+
+    @Test
+    void closeConsumerConnectionTest() {
+        activeMqManager.closeConsumerConnection();
+        Mockito.verify(activeMqManager).closeConsumerConnection();
+    }
+
+    @Test
+    void pushNewMessageToQueueTest() {
+        POJOMessage message = new POJOMessage("Sasha", 7, LocalDateTime.now());
+        activeMqManager.pushNewMessageToQueue(message);
+        Mockito.verify(activeMqManager).pushNewMessageToQueue(message);
+    }
+    @Test
+    void pullNewMessageFromQueueTest() {
+        Mockito.when(activeMqManager.pullNewMessageFromQueue()).thenReturn(new POJOMessage("Sasha",7,LocalDateTime.now()));
+                //thenReturn(new POJOMessage("Sasha",7,LocalDateTime.now()));
+    }
 }

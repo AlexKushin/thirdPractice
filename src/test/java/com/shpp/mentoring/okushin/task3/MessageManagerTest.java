@@ -20,84 +20,67 @@ class MessageManagerTest extends MessageManager {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = factory.getValidator();
 
-   /* @BeforeEach
-    void setCountToZero() {
-        POJOMessage.setTotalToZero();
+
+    @Test
+    void validMessagesCountLessThan10Test() {
+
+        POJOMessage message = new POJOMessage("asdfghjk", 1, LocalDateTime.now());
+
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
+        assertFalse(violations.isEmpty());
+
     }
+    @Test
+    void validMessagesCountMoreThan10Test() {
 
-    */
+        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
 
-    /*@Test
-    void validMessagesCountTest() {
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
+        assertTrue(violations.isEmpty());
 
-        POJOMessage message;
+    }
+    @Test
+    void validMessagesLengthLessThan7Test() {
 
-        List<POJOMessage> messageList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            message = new POJOMessage("asdfghjk", LocalDateTime.now());
-            messageList.add(message);
-        }
-        System.out.println(messageList.size() + "size");
-        for (int i = 0; i < 9; i++) {
-            Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
-            assertFalse(violations.isEmpty());
+        POJOMessage message = new POJOMessage("asd", 10, LocalDateTime.now());
 
-        }
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(messageList.size() - 1));
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
+        assertFalse(violations.isEmpty());
+
+    }
+    @Test
+    void validMessagesLengthMoreThan7Test() {
+
+        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
+
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
         assertTrue(violations.isEmpty());
 
     }
 
     @Test
-    void validMessagesLengthTest() {
-        POJOMessage message;
-        List<POJOMessage> messageList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            if (i > 14) {
-                message = new POJOMessage("asd", LocalDateTime.now());
-            } else {
-                message = new POJOMessage("asdfghjk", LocalDateTime.now());
-            }
-            messageList.add(message);
-        }
-        for (int i = 9; i < 15; i++) {
-            Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
-            assertTrue(violations.isEmpty());
-
-        }
-        for (int i = 15; i < messageList.size(); i++) {
-            Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
-            assertFalse(violations.isEmpty());
-
-        }
-    }
-
-    @Test
     void validMessagesContainsATest() {
-        POJOMessage message;
-        List<POJOMessage> messageList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            if (i > 14) {
-                message = new POJOMessage("sdfghjkl", LocalDateTime.now());
-            } else {
-                message = new POJOMessage("asdfghjk", LocalDateTime.now());
-            }
-            messageList.add(message);
-        }
-        for (int i = 9; i < 15; i++) {
-            Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
-            assertTrue(violations.isEmpty());
-        }
-        for (int i = 15; i < messageList.size(); i++) {
-            Set<ConstraintViolation<POJOMessage>> violations = validator.validate(messageList.get(i));
-            assertFalse(violations.isEmpty());
-        }
+
+        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
+
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
+        assertTrue(violations.isEmpty());
+
+    }
+    @Test
+    void validMessagesDoesntContainATest() {
+
+        POJOMessage message = new POJOMessage("sddfghj", 10, LocalDateTime.now());
+
+        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
+        assertFalse(violations.isEmpty());
+
     }
 
     @Test
     void testWriteToCsvValidatedMessages() {
     }
 
-     */
+
 
 }

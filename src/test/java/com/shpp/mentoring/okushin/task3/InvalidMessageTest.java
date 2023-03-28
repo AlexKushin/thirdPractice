@@ -23,6 +23,6 @@ class InvalidMessageTest extends InvalidMessage {
 
     @Test
     void testGetError() {
-        assertEquals("some error", invalidTestMessage.getError());
+        assertEquals("some error", invalidTestMessage.getErrors());
     }
 }

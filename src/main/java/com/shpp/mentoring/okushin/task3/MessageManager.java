@@ -20,6 +20,9 @@ import java.util.stream.Stream;
 public class MessageManager {
     private static final Logger logger = LoggerFactory.getLogger(MessageManager.class);
 
+    public MessageManager() {
+
+    }
 
     public static void writeToCsvValidatedMessages(Stream<POJOMessage> messageStream, Validator validator) {
         AtomicInteger total = new AtomicInteger(0);
@@ -58,7 +61,7 @@ public class MessageManager {
             double messagesPerSecond = total.get() / elapsedSeconds;
 
             logger.info("Receiving speed: {} messages per second, total = {} , elapseSeconds = {}",
-                    messagesPerSecond, total.get(),elapsedSeconds);
+                    messagesPerSecond, total.get(), elapsedSeconds);
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

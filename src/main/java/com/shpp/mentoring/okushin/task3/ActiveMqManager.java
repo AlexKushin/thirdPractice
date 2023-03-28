@@ -1,5 +1,8 @@
 package com.shpp.mentoring.okushin.task3;
 
+import com.shpp.mentoring.okushin.exceptions.CreateConnectionException;
+import com.shpp.mentoring.okushin.exceptions.ReceiveMessageException;
+import com.shpp.mentoring.okushin.exceptions.SendMessageException;
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,15 +18,11 @@ public class ActiveMqManager {
     private MessageProducer producer;
 
     private MessageConsumer consumer;
-    private Destination producerDestination;
-    private Destination consumerDestination;
     private Session producerSession;
     private Session consumerSession;
 
 
-    private boolean producerConnectionIsClosed = true;
-    private boolean consumerConnectionIsClosed = true;
-    private boolean allConnectionsAreClosed = true;
+
 
     public ActiveMqManager() {
     }
@@ -33,6 +32,7 @@ public class ActiveMqManager {
 
         pooledConnectionFactory.setConnectionFactory(activeMQConnectionFactory);
         pooledConnectionFactory.setMaxConnections(10);
+        loggerAMqM.info("ActiveMqManager object is created");
     }
 
 
@@ -40,11 +40,11 @@ public class ActiveMqManager {
         try {
             producerConnection = pooledConnectionFactory.createConnection();
             producerConnection.start();
-
+            loggerAMqM.info("Producer connection started");
             return producerConnection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         } catch (JMSException e) {
-            loggerAMqM.error("Can't create session {}", e.getMessage(), e);
-            throw new RuntimeException(e);
+            loggerAMqM.error("Can't create producer session {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't create session for producer");
         }
     }
 
@@ -52,22 +52,25 @@ public class ActiveMqManager {
         try {
             consumerConnection = connectionFactory.createConnection();
             consumerConnection.start();
+            loggerAMqM.info("Consumer connection started");
             return consumerConnection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         } catch (JMSException e) {
-            loggerAMqM.error("Can't create session {}", e.getMessage(), e);
-            throw new RuntimeException(e);
+            loggerAMqM.error("Can't create consumer session {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't create session for consumer");
         }
     }
 
     public void createNewConnectionForProducer(String queueName) {
         try {
             producerSession = createActiveMQSessionForProducer();
-            producerDestination = producerSession.createQueue(queueName);
+            Destination producerDestination = producerSession.createQueue(queueName);
             producer = producerSession.createProducer(producerDestination);
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-            producerConnectionIsClosed = false;
+            loggerAMqM.info("Producer connection is created");
+
         } catch (JMSException e) {
-            throw new RuntimeException();
+            loggerAMqM.error("Can't create producer connection {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't create producer connection");
         }
 
     }
@@ -78,9 +81,11 @@ public class ActiveMqManager {
             producerSession.close();
             producerConnection.close();
             pooledConnectionFactory.clear();
-            producerConnectionIsClosed = true;
+            loggerAMqM.info("Producer connection is closed");
+
         } catch (JMSException e) {
-            throw new RuntimeException(e);
+            loggerAMqM.error("Can't close producer connection {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't close producer connection");
         }
 
     }
@@ -88,11 +93,13 @@ public class ActiveMqManager {
     public void createNewConnectionForConsumer(String queueName) {
         try {
             consumerSession= createActiveMQSessionForConsumer();
-            consumerDestination = consumerSession.createQueue(queueName);
+            Destination consumerDestination = consumerSession.createQueue(queueName);
             consumer = consumerSession.createConsumer(consumerDestination);
-            consumerConnectionIsClosed = false;
+            loggerAMqM.info("Consumer connection is created");
+
         } catch (JMSException e) {
-            throw new RuntimeException(e);
+            loggerAMqM.error("Can't create producer connection {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't create consumer connection");
         }
     }
 
@@ -101,27 +108,14 @@ public class ActiveMqManager {
             consumer.close();
             consumerSession.close();
             consumerConnection.close();
-            consumerConnectionIsClosed = true;
+            loggerAMqM.info("Consumer connection is closed");
         } catch (JMSException e) {
-            throw new RuntimeException();
+            loggerAMqM.error("Can't close producer connection {}", e.getMessage(), e);
+            throw new CreateConnectionException("Can't close consumer connection");
         }
     }
 
-    public void createNewConnectionForAll(String queueName) {
-        createNewConnectionForProducer(queueName);
 
-        createNewConnectionForConsumer(queueName);
-
-
-        allConnectionsAreClosed = false;
-
-    }
-
-    public void closeAllConnections() {
-        closeProducerConnection();
-        closeConsumerConnection();
-        allConnectionsAreClosed = true;
-    }
 
     public void pushNewMessageToQueue(POJOMessage message) {
         ObjectMessage objectMessage;
@@ -129,37 +123,40 @@ public class ActiveMqManager {
             objectMessage = producerSession.createObjectMessage(message);
             producer.send(objectMessage);
         } catch (JMSException e) {
-            throw new RuntimeException(e);
+            loggerAMqM.error("Can't send message to queue  {}", e.getMessage(), e);
+            throw new SendMessageException("Can't send message to queue");
         }
 
     }
 
-    public Message pullNewMessageQueue() {
+    /*public Message pullNewMessageFromQueue() {
         try {
             return consumer.receive(1000);
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
+    }
+
+     */
+
+
+    public POJOMessage pullNewMessageFromQueue() {
+        try {
+            Message message =  consumer.receive(1000);
+            if (message == null) {
+                return null;
+            }
+            ObjectMessage objectMessage = (ObjectMessage) message;
+                return (POJOMessage) objectMessage.getObject();
+            } catch (JMSException e) {
+            loggerAMqM.error("Can't receive message from queue  {}", e.getMessage(), e);
+            throw new ReceiveMessageException("Can't receive message from queue");
+            }
+        }
+
+
 
     }
 
-    public MessageProducer getProducer() {
-        return producer;
-    }
 
-    public MessageConsumer getConsumer() {
-        return consumer;
-    }
 
-    public boolean isProducerConnectionIsClosed() {
-        return producerConnectionIsClosed;
-    }
-
-    public boolean isConsumerConnectionIsClosed() {
-        return consumerConnectionIsClosed;
-    }
-
-    public boolean isAllConnectionsAreClosed() {
-        return allConnectionsAreClosed;
-    }
-}

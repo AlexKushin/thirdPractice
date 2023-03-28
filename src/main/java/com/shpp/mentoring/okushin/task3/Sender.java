@@ -30,26 +30,26 @@ public class Sender extends Thread {
     @Override
     public void run() {
         manager.createNewConnectionForProducer(queueName);
-      //  manager.createNewConnectionForConsumer("IN-queue");
         LocalDateTime startGeneratingTime = LocalDateTime.now();
         sendMessagesToQueue(manager, amount, startGeneratingTime, timeLimit);
+        manager.pushNewMessageToQueue(poisonPillPojo);
         manager.closeProducerConnection();
         interrupt();
     }
 
     public void sendMessagesToQueue(ActiveMqManager manager, int amount,
                                     LocalDateTime startGeneratingTime, long timeLimit) {
+
         AtomicInteger total = new AtomicInteger(0);
         long startTime = System.currentTimeMillis();
         LocalDateTime finishTime = startGeneratingTime.plusSeconds(timeLimit);
+
         Stream.generate(() -> new POJOMessage(StringGenerator.randomString(), total.get(), LocalDateTime.now()))
                 .takeWhile(b -> LocalDateTime.now().isBefore(finishTime)).limit(amount).
                 forEach(m -> {
                     total.incrementAndGet();
                     manager.pushNewMessageToQueue(m);
                 });
-
-        manager.pushNewMessageToQueue(poisonPillPojo);
 
         long endTime = System.currentTimeMillis();
         double elapsedSeconds = (endTime - startTime) / 1000.0;

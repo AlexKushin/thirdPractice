@@ -3,20 +3,20 @@ package com.shpp.mentoring.okushin.task3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.ObjectMessage;
 import javax.validation.Validator;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class Receiver extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
-    private final POJOMessage poisonPillPojo;
-    private final ActiveMqManager manager;
+    private  POJOMessage poisonPillPojo;
+    private ActiveMqManager manager;
 
-    private final Validator validator;
+    private  Validator validator;
+
+    public Receiver(){
+
+    }
 
     public Receiver(POJOMessage poisonPillPojo, ActiveMqManager manager, Validator validator) {
         this.poisonPillPojo = poisonPillPojo;
@@ -37,10 +37,9 @@ public class Receiver extends Thread {
         interrupt();
 
     }
-
-    public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
+    /*public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
         return Stream.generate(() -> {
-                    Message message = manager.pullNewMessageQueue();
+                    Message message = manager.pullNewMessageFromQueue();
                     if (message == null) {
                         return null;
                     }
@@ -51,6 +50,11 @@ public class Receiver extends Thread {
                         throw new RuntimeException(e);
                     }
                 })
+                .takeWhile(Objects::nonNull).takeWhile(m -> !m.equals(poisonPillPojo));
+    }
+     */
+    public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
+        return Stream.generate(manager::pullNewMessageFromQueue)
                 .takeWhile(Objects::nonNull).takeWhile(m -> !m.equals(poisonPillPojo));
 
     }
