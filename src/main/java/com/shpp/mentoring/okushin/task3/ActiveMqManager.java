@@ -2,7 +2,6 @@ package com.shpp.mentoring.okushin.task3;
 
 import com.shpp.mentoring.okushin.exceptions.CreateConnectionException;
 import com.shpp.mentoring.okushin.exceptions.ReceiveMessageException;
-import com.shpp.mentoring.okushin.exceptions.SendMessageException;
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,14 +21,11 @@ public class ActiveMqManager {
     private Session consumerSession;
 
 
-
-
     public ActiveMqManager() {
     }
 
     public ActiveMqManager(ConnectionFactory activeMQConnectionFactory) {
         connectionFactory = activeMQConnectionFactory;
-
         pooledConnectionFactory.setConnectionFactory(activeMQConnectionFactory);
         pooledConnectionFactory.setMaxConnections(10);
         loggerAMqM.info("ActiveMqManager object is created");
@@ -92,7 +88,7 @@ public class ActiveMqManager {
 
     public void createNewConnectionForConsumer(String queueName) {
         try {
-            consumerSession= createActiveMQSessionForConsumer();
+            consumerSession = createActiveMQSessionForConsumer();
             Destination consumerDestination = consumerSession.createQueue(queueName);
             consumer = consumerSession.createConsumer(consumerDestination);
             loggerAMqM.info("Consumer connection is created");
@@ -116,43 +112,40 @@ public class ActiveMqManager {
     }
 
 
-
     public void pushNewMessageToQueue(POJOMessage message) {
         ObjectMessage objectMessage;
         try {
             objectMessage = producerSession.createObjectMessage(message);
             producer.send(objectMessage);
         } catch (JMSException e) {
-            loggerAMqM.error("Can't send message to queue  {}", e.getMessage(), e);
-            throw new SendMessageException("Can't send message to queue");
+            loggerAMqM.error("Can't send message from queue  {}", e.getMessage(), e);
+            throw new ReceiveMessageException("Can't send message from queue");
+        } finally {
+            closeProducerConnection();
         }
 
+
     }
-
-
-
-
 
 
     public POJOMessage pullNewMessageFromQueue() {
         try {
-            Message message =  consumer.receive(1000);
+            Message message = consumer.receive(1000);
             if (message == null) {
                 return null;
             }
             ObjectMessage objectMessage = (ObjectMessage) message;
-                return (POJOMessage) objectMessage.getObject();
-            } catch (JMSException e) {
+            return (POJOMessage) objectMessage.getObject();
+        } catch (JMSException e) {
             loggerAMqM.error("Can't receive message from queue  {}", e.getMessage(), e);
             throw new ReceiveMessageException("Can't receive message from queue");
-            }
+        } finally {
+            closeConsumerConnection();
         }
-
-
-
-
-
     }
+
+
+}
 
 
 

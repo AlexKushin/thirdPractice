@@ -32,10 +32,11 @@ public class Receiver extends Thread {
         manager.createNewConnectionForConsumer(queueName);
         //Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
 
-        MessageManager.writeToCsvValidatedMessages(receiveMessagesFromQueue(manager, poisonPillPojo), validator);
-        
-        manager.closeConsumerConnection();
+        logger.info("Receiver thread started");
+        MessageManager.writeToCsvValidatedMessages(poisonPillPojo,validator,manager);
 
+        manager.closeConsumerConnection();
+        logger.info("Receiver thread finished");
         interrupt();
     }
 

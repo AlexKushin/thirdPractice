@@ -18,7 +18,6 @@ class StringGeneratorTest extends StringGenerator {
     })
     //run test a few times and compare with came string every time
     void testRandomString(String str) {
-
-        assertNotEquals(str, StringGenerator.randomString());
+        assertNotEquals(str, StringGenerator.randomString(),"Strings match but they haven't to");
     }
 }

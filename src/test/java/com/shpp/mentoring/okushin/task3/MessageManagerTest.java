@@ -24,7 +24,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("asdfghjk", 1, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty());
+        assertFalse(violations.isEmpty(),"hadn't passed validation by value of count");
 
     }
     @Test
@@ -33,7 +33,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty());
+        assertTrue(violations.isEmpty(), "hadn't passed validation by value of count");
 
     }
     @Test
@@ -42,7 +42,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("asd", 10, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty());
+        assertFalse(violations.isEmpty(), "hadn't passed validation by length of name");
 
     }
     @Test
@@ -51,7 +51,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty());
+        assertTrue(violations.isEmpty(), "hadn't passed validation by length of name");
 
     }
 
@@ -61,7 +61,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty());
+        assertTrue(violations.isEmpty(), "hadn't passed validation by containing \"a\"");
 
     }
     @Test
@@ -70,7 +70,7 @@ class MessageManagerTest extends MessageManager {
         POJOMessage message = new POJOMessage("sddfghj", 10, LocalDateTime.now());
 
         Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty());
+        assertFalse(violations.isEmpty(), "hadn't passed validation by containing \"a\"");
 
     }
 

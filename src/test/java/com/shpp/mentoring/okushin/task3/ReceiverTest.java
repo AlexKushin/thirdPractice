@@ -35,7 +35,7 @@ class ReceiverTest extends Receiver {
                 .thenReturn(pojoMessage);
 
         Stream<POJOMessage> stream = testReceiver.receiveMessagesFromQueue(amqManagerMock,poisonPillPOJO);
-        assertEquals(4,stream.count());
+        assertEquals(4,stream.count(),"Wrong amount of pullNewMessageFromQueue() method calls");
 
     }
 
@@ -57,7 +57,7 @@ class ReceiverTest extends Receiver {
                 .thenReturn(pojoMessage);
 
         Stream<POJOMessage> stream = testReceiver.receiveMessagesFromQueue(amqManagerMock,poisonPillPOJO);
-        assertEquals(4,stream.count());
+        assertEquals(4,stream.count(),"Wrong amount of pullNewMessageFromQueue() method calls");
 
     }
 

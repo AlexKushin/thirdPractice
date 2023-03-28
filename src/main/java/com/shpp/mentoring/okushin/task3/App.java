@@ -36,6 +36,7 @@ public class App {
         String url = PropertyManager.getStringPropertiesValue("brokerURL", prop);
         String userName = PropertyManager.getStringPropertiesValue("userName", prop);
         String password = PropertyManager.getStringPropertiesValue("password", prop);
+        logger.info("all necessary data was successfully read from property file");
 
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
@@ -47,14 +48,14 @@ public class App {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
+        logger.info("poison pill POJO message - name: {}, count: {}, createdAtDataTime: {}",
+                poisonPillPojo.getName(),poisonPillPojo.getCount(),poisonPillPojo.getCreatedAtTime());
 
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
         Receiver receiveThread = new Receiver( amqManager, queueName, validator,poisonPillPojo);
 
         sendThread.start();
         receiveThread.start();
-
-
 
     }
 }

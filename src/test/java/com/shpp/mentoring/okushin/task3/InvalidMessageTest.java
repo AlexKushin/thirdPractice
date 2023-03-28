@@ -13,16 +13,16 @@ class InvalidMessageTest extends InvalidMessage {
     @Test
     void testGetName() {
 
-        assertEquals("Sasha", invalidTestMessage.getName());
+        assertEquals("Sasha", invalidTestMessage.getName(),"name doesn't match");
     }
 
     @Test
     void testGetCount() {
-        assertEquals(7, invalidTestMessage.getCount());
+        assertEquals(7, invalidTestMessage.getCount(),"count doesn't match");
     }
 
     @Test
-    void testGetError() {
-        assertEquals("some error", invalidTestMessage.getErrors());
+    void testGetErrors() {
+        assertEquals("some error", invalidTestMessage.getErrors(),"errors don't match");
     }
 }

@@ -29,11 +29,13 @@ public class Sender extends Thread {
 
     @Override
     public void run() {
+        logger.info("Sender thread started");
         manager.createNewConnectionForProducer(queueName);
         LocalDateTime startGeneratingTime = LocalDateTime.now();
         sendMessagesToQueue(manager, amount, startGeneratingTime, timeLimit);
         manager.pushNewMessageToQueue(poisonPillPojo);
         manager.closeProducerConnection();
+        logger.info("Sender thread finished");
         interrupt();
     }
 
