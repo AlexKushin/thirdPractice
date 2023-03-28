@@ -129,15 +129,9 @@ public class ActiveMqManager {
 
     }
 
-    /*public Message pullNewMessageFromQueue() {
-        try {
-            return consumer.receive(1000);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-     */
+
+
 
 
     public POJOMessage pullNewMessageFromQueue() {
@@ -153,6 +147,8 @@ public class ActiveMqManager {
             throw new ReceiveMessageException("Can't receive message from queue");
             }
         }
+
+
 
 
 

@@ -19,7 +19,7 @@ class ReceiverTest extends Receiver {
     @Mock
     ActiveMqManager amqManagerMock = mock(ActiveMqManager.class);
 
-    @Test
+   @Test
     void testStopReceiveMessagesFromQueueByPoisonPill() {
         Receiver testReceiver = new Receiver();
         POJOMessage poisonPillPOJO = new POJOMessage("poison pill", -1, LocalDateTime.now());
@@ -39,7 +39,9 @@ class ReceiverTest extends Receiver {
 
     }
 
-    @Test
+
+
+  @Test
     void testStopReceiveMessagesFromQueueByNull() {
         Receiver testReceiver = new Receiver();
         POJOMessage poisonPillPOJO = new POJOMessage("poison pill", -1, LocalDateTime.now());
@@ -58,4 +60,6 @@ class ReceiverTest extends Receiver {
         assertEquals(4,stream.count());
 
     }
+
+
 }

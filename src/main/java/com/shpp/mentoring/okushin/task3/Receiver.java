@@ -30,36 +30,19 @@ public class Receiver extends Thread {
     public void run() {
 
         manager.createNewConnectionForConsumer(queueName);
+        //Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
 
-        Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
-
-        MessageManager.writeToCsvValidatedMessages(messageStream, validator);
-
+        MessageManager.writeToCsvValidatedMessages(receiveMessagesFromQueue(manager, poisonPillPojo), validator);
+        
         manager.closeConsumerConnection();
 
         interrupt();
-
     }
 
-    /*public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
-        return Stream.generate(() -> {
-                    Message message = manager.pullNewMessageFromQueue();
-                    if (message == null) {
-                        return null;
-                    }
-                    ObjectMessage objectMessage = (ObjectMessage) message;
-                    try {
-                        return (POJOMessage) objectMessage.getObject();
-                    } catch (JMSException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .takeWhile(Objects::nonNull).takeWhile(m -> !m.equals(poisonPillPojo));
-    }
-     */
     public Stream<POJOMessage> receiveMessagesFromQueue(ActiveMqManager manager, POJOMessage poisonPillPojo) {
         return Stream.generate(manager::pullNewMessageFromQueue)
                 .takeWhile(Objects::nonNull).takeWhile(m -> !m.equals(poisonPillPojo));
-
     }
+
+
 }
