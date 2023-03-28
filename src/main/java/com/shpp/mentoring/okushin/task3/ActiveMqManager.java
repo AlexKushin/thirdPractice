@@ -120,8 +120,6 @@ public class ActiveMqManager {
         } catch (JMSException e) {
             loggerAMqM.error("Can't send message from queue  {}", e.getMessage(), e);
             throw new ReceiveMessageException("Can't send message from queue");
-        } finally {
-            closeProducerConnection();
         }
 
 
@@ -139,9 +137,7 @@ public class ActiveMqManager {
         } catch (JMSException e) {
             loggerAMqM.error("Can't receive message from queue  {}", e.getMessage(), e);
             throw new ReceiveMessageException("Can't receive message from queue");
-        } finally {
-            closeConsumerConnection();
-        }
+        } 
     }
 
 
