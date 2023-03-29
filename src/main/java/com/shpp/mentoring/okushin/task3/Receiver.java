@@ -28,14 +28,18 @@ public class Receiver extends Thread {
 
     @Override
     public void run() {
-
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         manager.createNewConnectionForConsumer(queueName);
         //Stream<POJOMessage> messageStream = receiveMessagesFromQueue(manager, poisonPillPojo);
 
         logger.info("Receiver thread started");
         MessageManager.writeToCsvValidatedMessages(poisonPillPojo,validator,manager);
 
-        manager.closeConsumerConnection();
+       manager.closeConsumerConnection();
         logger.info("Receiver thread finished");
         interrupt();
     }

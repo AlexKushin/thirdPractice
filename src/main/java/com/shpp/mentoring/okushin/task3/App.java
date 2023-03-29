@@ -21,10 +21,10 @@ public class App {
             try {
                 messagesAmount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                messagesAmount = 1000;
+                messagesAmount = 100000;
             }
         } else {
-            messagesAmount = 1000;
+            messagesAmount = 100000;
         }
 
         PropertyManager pm = new PropertyManager();
@@ -52,10 +52,16 @@ public class App {
                 poisonPillPojo.getName(),poisonPillPojo.getCount(),poisonPillPojo.getCreatedAtTime());
 
         Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
-        Receiver receiveThread = new Receiver( amqManager, queueName, validator,poisonPillPojo);
+        Receiver receiveThread1 = new Receiver( amqManager, queueName, validator,poisonPillPojo);
+
 
         sendThread.start();
-        receiveThread.start();
+        if(sendThread.isAlive()) {
+            receiveThread1.start();
+        }
+
+
+
 
     }
 }
