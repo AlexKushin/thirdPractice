@@ -21,16 +21,16 @@ public class App {
             try {
                 messagesAmount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                messagesAmount = 100000;
+                messagesAmount = 200;
             }
         } else {
-            messagesAmount = 100000;
+            messagesAmount = 200;
         }
 
         PropertyManager pm = new PropertyManager();
         Properties prop = new Properties();
         pm.readPropertyFile("config.properties", prop);
-
+        logger.info("start reading all necessary data for access to ActiveMq broker");
         long timeLimit = Long.parseLong(PropertyManager.getStringPropertiesValue("poisonPillSec", prop));
         String queueName = PropertyManager.getStringPropertiesValue("queueName", prop);
         String url = PropertyManager.getStringPropertiesValue("brokerURL", prop);
@@ -47,22 +47,18 @@ public class App {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
+
         POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
         logger.info("poison pill POJO message - name: {}, count: {}, createdAtDataTime: {}",
-                poisonPillPojo.getName(),poisonPillPojo.getCount(),poisonPillPojo.getCreatedAtTime());
+                poisonPillPojo.getName(), poisonPillPojo.getCount(), poisonPillPojo.getCreatedAtTime());
+        amqManager.createNewConnectionForProducer(queueName);
+        amqManager.createNewConnectionForConsumer(queueName);
 
-        Sender sendThread = new Sender(amqManager, queueName, messagesAmount, timeLimit, poisonPillPojo);
-        Receiver receiveThread1 = new Receiver( amqManager, queueName, validator,poisonPillPojo);
-
+        Sender sendThread = new Sender(amqManager, messagesAmount, timeLimit, poisonPillPojo);
+        Receiver receiveThread = new Receiver(amqManager, validator, poisonPillPojo);
 
         sendThread.start();
-        if(sendThread.isAlive()) {
-            receiveThread1.start();
-        }
-
-
-
-
+        receiveThread.start();
     }
 }
 

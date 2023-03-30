@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import javax.jms.JMSException;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,30 +15,28 @@ class ActiveMqManagerTest extends ActiveMqManager {
     @Mock
     ActiveMqManager activeMqManager = mock(ActiveMqManager.class);
 
-
     @Test
-    void createActiveMQSessionForProducerTest() {
-
+    void createActiveMQSessionForProducerTest() throws JMSException {
         activeMqManager.createActiveMQSessionForProducer();
         Mockito.verify(activeMqManager).createActiveMQSessionForProducer();
 
     }
 
     @Test
-    void createNewConnectionForProducerTest() {
+    void createNewConnectionForProducerTest() throws JMSException {
 
         activeMqManager.createNewConnectionForProducer("name");
         Mockito.verify(activeMqManager).createNewConnectionForProducer("name");
     }
 
     @Test
-    void createActiveMQSessionForConsumerTest() {
+    void createActiveMQSessionForConsumerTest() throws JMSException {
         activeMqManager.createActiveMQSessionForConsumer();
         Mockito.verify(activeMqManager).createActiveMQSessionForConsumer();
     }
 
     @Test
-    void createNewConnectionForConsumerTest() {
+    void createNewConnectionForConsumerTest() throws JMSException {
 
         activeMqManager.createNewConnectionForConsumer("name");
         Mockito.verify(activeMqManager).createNewConnectionForConsumer("name");
@@ -45,28 +44,28 @@ class ActiveMqManagerTest extends ActiveMqManager {
     }
 
     @Test
-    void closeProducerConnectionTest() {
+    void closeProducerConnectionTest() throws JMSException {
         activeMqManager.closeProducerConnection();
         Mockito.verify(activeMqManager).closeProducerConnection();
     }
 
     @Test
-    void closeConsumerConnectionTest() {
+    void closeConsumerConnectionTest() throws JMSException {
         activeMqManager.closeConsumerConnection();
         Mockito.verify(activeMqManager).closeConsumerConnection();
     }
 
     @Test
-    void pushNewMessageToQueueTest() {
+    void pushNewMessageToQueueTest() throws JMSException {
         POJOMessage message = new POJOMessage("Sasha", 7, LocalDateTime.now());
-        activeMqManager.pushNewMessageToQueue(message);
-        Mockito.verify(activeMqManager).pushNewMessageToQueue(message);
+        activeMqManager.sendNewMessageToQueue(message);
+        Mockito.verify(activeMqManager).sendNewMessageToQueue(message);
     }
 
     @Test
     void pullNewMessageFromQueueTest() {
-        Mockito.when(activeMqManager.pullNewMessageFromQueue())
+        Mockito.when(activeMqManager.receiveNewMessageFromQueue())
                 .thenReturn(new POJOMessage("Sasha", 7, LocalDateTime.now()));
-        assertEquals(POJOMessage.class, activeMqManager.pullNewMessageFromQueue().getClass());
+        assertEquals(POJOMessage.class, activeMqManager.receiveNewMessageFromQueue().getClass());
     }
 }

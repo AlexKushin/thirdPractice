@@ -1,81 +1,58 @@
 package com.shpp.mentoring.okushin.task3;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class MessageManagerTest extends MessageManager {
+    @Mock
+    ActiveMqManager amqManagerMock = mock(ActiveMqManager.class);
 
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    Validator validator = factory.getValidator();
-
-
+    @Mock
+    Validator validatorMock=mock(Validator.class);
     @Test
-    void validMessagesCountLessThan10Test() {
+    void testStopReceiveMessagesFromQueueByPoisonPill() {
 
-        POJOMessage message = new POJOMessage("asdfghjk", 1, LocalDateTime.now());
+        POJOMessage poisonPillPOJO = new POJOMessage("poison pill", -1, LocalDateTime.now());
+        POJOMessage pojoMessage = new POJOMessage("Sasha", 7, LocalDateTime.now());
+        MessageManager messageManager = new MessageManager(amqManagerMock,validatorMock,poisonPillPOJO);
 
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty(),"hadn't passed validation by value of count");
+        Mockito.when(amqManagerMock.receiveNewMessageFromQueue())
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(poisonPillPOJO)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage);
+
+        messageManager.writeValidatedMessagesFromAmqToCsvFiles();
+        verify(amqManagerMock,times(5)).receiveNewMessageFromQueue();
 
     }
     @Test
-    void validMessagesCountMoreThan10Test() {
+    void testWriteValidatedMessagesFromAmqToCsvFiles() {
 
-        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
+        POJOMessage poisonPillPOJO = new POJOMessage("poison pill", -1, LocalDateTime.now());
+        POJOMessage pojoMessage = new POJOMessage("Sasha",7,LocalDateTime.now());
+        MessageManager messageManager = new MessageManager(amqManagerMock,validatorMock,poisonPillPOJO);
 
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty(), "hadn't passed validation by value of count");
+        Mockito.when(amqManagerMock.receiveNewMessageFromQueue())
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage)
+                .thenReturn(null)
+                .thenReturn(pojoMessage)
+                .thenReturn(pojoMessage);
 
-    }
-    @Test
-    void validMessagesLengthLessThan7Test() {
-
-        POJOMessage message = new POJOMessage("asd", 10, LocalDateTime.now());
-
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty(), "hadn't passed validation by length of name");
-
-    }
-    @Test
-    void validMessagesLengthMoreThan7Test() {
-
-        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
-
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty(), "hadn't passed validation by length of name");
+        messageManager.writeValidatedMessagesFromAmqToCsvFiles();
+        verify(amqManagerMock,times(5)).receiveNewMessageFromQueue();
 
     }
-
-    @Test
-    void validMessagesContainsATest() {
-
-        POJOMessage message = new POJOMessage("asdfghjk", 10, LocalDateTime.now());
-
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertTrue(violations.isEmpty(), "hadn't passed validation by containing \"a\"");
-
-    }
-    @Test
-    void validMessagesDoesntContainATest() {
-
-        POJOMessage message = new POJOMessage("sddfghj", 10, LocalDateTime.now());
-
-        Set<ConstraintViolation<POJOMessage>> violations = validator.validate(message);
-        assertFalse(violations.isEmpty(), "hadn't passed validation by containing \"a\"");
-
-    }
-
-
-
-
-
 }

@@ -14,7 +14,7 @@ class StringGeneratorTest extends StringGenerator {
             "charles",
             "12",
             "b",
-            "asdfg"
+            "asd"
     })
     //run test a few times and compare with came string every time
     void testRandomString(String str) {

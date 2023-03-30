@@ -2,17 +2,21 @@ package com.shpp.mentoring.okushin.task3;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * Simple class which describes pojo message which didn't pass validation
+ */
+
 @JsonPropertyOrder({"name", "count", "error"})
-public class InvalidMessage {
+public class InvalidPojoMessage {
     private String name;
     private int count;
     private String errors;
 
 
-    public InvalidMessage() {
+    public InvalidPojoMessage() {
     }
 
-    public InvalidMessage(String name, int count, String error) {
+    public InvalidPojoMessage(String name, int count, String error) {
         this.name = name;
         this.count = count;
         this.errors = error;

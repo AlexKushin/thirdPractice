@@ -11,7 +11,7 @@ public class Sender extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
     private POJOMessage poisonPillPojo;
     private ActiveMqManager manager;
-    private String queueName;
+
     private int amount;
     private long timeLimit;
 
@@ -19,9 +19,8 @@ public class Sender extends Thread {
     public Sender() {
     }
 
-    public Sender(ActiveMqManager manager, String queueName, int amount, long timeLimit, POJOMessage poisonPillPojo) {
+    public Sender(ActiveMqManager manager, int amount, long timeLimit, POJOMessage poisonPillPojo) {
         this.manager = manager;
-        this.queueName = queueName;
         this.amount = amount;
         this.timeLimit = timeLimit;
         this.poisonPillPojo = poisonPillPojo;
@@ -30,10 +29,8 @@ public class Sender extends Thread {
     @Override
     public void run() {
         logger.info("Sender thread started");
-        manager.createNewConnectionForProducer(queueName);
         LocalDateTime startGeneratingTime = LocalDateTime.now();
         sendMessagesToQueue(manager, amount, startGeneratingTime, timeLimit);
-        manager.pushNewMessageToQueue(poisonPillPojo);
         manager.closeProducerConnection();
         logger.info("Sender thread finished");
         interrupt();
@@ -50,16 +47,18 @@ public class Sender extends Thread {
                 .takeWhile(b -> LocalDateTime.now().isBefore(finishTime)).limit(amount).
                 forEach(m -> {
                     total.incrementAndGet();
-                    manager.pushNewMessageToQueue(m);
-                    logger.info("POJO message name: {} count: {} createdAtDataTime: {} was sent to queue",
-                            m.getName(),m.getCount(),m.getCreatedAtTime());
-                });
 
+                    manager.sendNewMessageToQueue(m);
+
+                    logger.info("Sent POJO message name: {} count: {} createdAtDataTime: {}",
+                            m.getName(), m.getCount(), m.getCreatedAtTime());
+                });
+        manager.sendNewMessageToQueue(poisonPillPojo);
         long endTime = System.currentTimeMillis();
         double elapsedSeconds = (endTime - startTime) / 1000.0;
         double messagesPerSecond = total.get() / elapsedSeconds;
 
-        logger.info("Sending speed: {} messages per second, total = {}, elapseSeconds = {}",
+        logger.info("SENDING SPEED: {} messages per second, total = {} messages, elapseSeconds = {}",
                 messagesPerSecond, total.get(), elapsedSeconds);
     }
 }

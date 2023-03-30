@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class InvalidMessageTest extends InvalidMessage {
+class InvalidPojoMessageTest extends InvalidPojoMessage {
 
 
-    InvalidMessage invalidTestMessage = new InvalidMessage("Sasha", 7, "some error");
+    InvalidPojoMessage invalidTestMessage = new InvalidPojoMessage("Sasha", 7, "some error");
 
 
     @Test
