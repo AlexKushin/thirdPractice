@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+/**
+ * Class Sender performs generating ad sending Pojo messages to ActiveMq broker queue
+ */
 public class Sender extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
     private POJOMessage poisonPillPojo;

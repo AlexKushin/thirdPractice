@@ -19,7 +19,7 @@ class ReceiverTest extends Receiver {
 
 
     @Test
-    void closeConsumerConnectionCallVerifying() throws JMSException {
+    void closeConsumerConnectionCallVerifying() {
         POJOMessage poisonPillPOJO = new POJOMessage("poison pill", -1, LocalDateTime.now());
         Receiver receiverTest = new Receiver(amqManagerMock, validatorMock, poisonPillPOJO);
         receiverTest.run();

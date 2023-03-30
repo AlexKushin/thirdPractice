@@ -2,6 +2,7 @@ package com.shpp.mentoring.okushin.task3;
 
 import com.shpp.mentoring.okushin.exceptions.ConnectionException;
 import com.shpp.mentoring.okushin.exceptions.ReceiveMessageException;
+import com.shpp.mentoring.okushin.exceptions.SendMessageException;
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -145,8 +146,9 @@ public class ActiveMqManager {
             objectMessage = producerSession.createObjectMessage(message);
             producer.send(objectMessage);
         } catch (JMSException e) {
+            closeProducerConnection();
             loggerAMqM.error("Can't send message from queue  {}", e.getMessage(), e);
-            throw new ReceiveMessageException("Can't send message from queue");
+            throw new SendMessageException("Can't send message from queue");
         }
     }
 
@@ -164,6 +166,7 @@ public class ActiveMqManager {
             return (POJOMessage) objectMessage.getObject();
         } catch (JMSException e) {
             loggerAMqM.error("Can't receive message from queue  {}", e.getMessage(), e);
+            closeConsumerConnection();
             throw new ReceiveMessageException("Can't receive message from queue");
         }
     }

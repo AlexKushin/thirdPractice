@@ -21,10 +21,10 @@ public class App {
             try {
                 messagesAmount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                messagesAmount = 200;
+                messagesAmount = 1000;
             }
         } else {
-            messagesAmount = 200;
+            messagesAmount = 1000;
         }
 
         PropertyManager pm = new PropertyManager();
@@ -45,20 +45,22 @@ public class App {
         connectionFactory.setPassword(password);
         ActiveMqManager amqManager = new ActiveMqManager(connectionFactory);
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            Validator validator = factory.getValidator();
+            POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
+            logger.info("poison pill POJO message - name: {}, count: {}, createdAtDataTime: {}",
+                    poisonPillPojo.getName(), poisonPillPojo.getCount(), poisonPillPojo.getCreatedAtTime());
+            amqManager.createNewConnectionForProducer(queueName);
+            amqManager.createNewConnectionForConsumer(queueName);
 
-        POJOMessage poisonPillPojo = new POJOMessage("poison pill", -1, LocalDateTime.now());
-        logger.info("poison pill POJO message - name: {}, count: {}, createdAtDataTime: {}",
-                poisonPillPojo.getName(), poisonPillPojo.getCount(), poisonPillPojo.getCreatedAtTime());
-        amqManager.createNewConnectionForProducer(queueName);
-        amqManager.createNewConnectionForConsumer(queueName);
+            Sender sendThread = new Sender(amqManager, messagesAmount, timeLimit, poisonPillPojo);
+            Receiver receiveThread = new Receiver(amqManager, validator, poisonPillPojo);
 
-        Sender sendThread = new Sender(amqManager, messagesAmount, timeLimit, poisonPillPojo);
-        Receiver receiveThread = new Receiver(amqManager, validator, poisonPillPojo);
+            sendThread.start();
+            receiveThread.start();
+        }
 
-        sendThread.start();
-        receiveThread.start();
+
     }
 }
 

@@ -40,6 +40,9 @@ public class MessageManager {
         this.poisonPillPojo = poisonPillPojo;
     }
 
+    /**
+     * method which
+     */
     public void writeValidatedMessagesFromAmqToCsvFiles() {
         ObjectMapper mapper = new CsvMapper().findAndRegisterModules();
         CsvMapper csvMapper = (CsvMapper) mapper;
@@ -60,9 +63,10 @@ public class MessageManager {
     }
 
     /**
-     * Receives pojo messages fro
-     * @param validWriter
-     * @param invalidWriter
+     * Receives pojo messages from ActiveMq broker queue, validates it and calls method to writing to CSV file
+     *
+     * @param validWriter   writer which writes valid pojo messages to CSV file of valid messages
+     * @param invalidWriter writer which writes invalid pojo messages to CSV file of invalid messages
      */
     private void receiveAndValidate(SequenceWriter validWriter, SequenceWriter invalidWriter) {
         AtomicInteger total = new AtomicInteger(0);
@@ -85,9 +89,10 @@ public class MessageManager {
 
     /**
      * checks set of received pojo message violations ad writes this poo to corresponding CSV file
-     * @param violations set of received pojo message violations after validation
-     * @param receivedPojo received pojo message from ActiveMq broker queue
-     * @param validWriter writer which writes valid pojo messages to CSV file of valid messages
+     *
+     * @param violations    set of received pojo message violations after validation
+     * @param receivedPojo  received pojo message from ActiveMq broker queue
+     * @param validWriter   writer which writes valid pojo messages to CSV file of valid messages
      * @param invalidWriter writer which writes invalid pojo messages to CSV file of invalid messages
      */
     private void writePojoMessageToAccordanceCsvFile(Set<ConstraintViolation<POJOMessage>> violations,

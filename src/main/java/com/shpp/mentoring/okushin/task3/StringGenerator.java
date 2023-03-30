@@ -2,7 +2,11 @@ package com.shpp.mentoring.okushin.task3;
 
 import java.util.Random;
 
+/**
+ * class StringGenerator for generating random strings
+ */
 public class StringGenerator {
+    private StringGenerator(){}
 
     public static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
