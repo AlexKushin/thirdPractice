@@ -34,6 +34,7 @@ public class Sender extends Thread {
         logger.info("Sender thread started");
         LocalDateTime startGeneratingTime = LocalDateTime.now();
         sendMessagesToQueue(manager, amount, startGeneratingTime, timeLimit);
+        manager.sendNewMessageToQueue(poisonPillPojo);
         manager.closeProducerConnection();
         logger.info("Sender thread finished");
         interrupt();
@@ -56,7 +57,7 @@ public class Sender extends Thread {
                     logger.info("Sent POJO message name: {} count: {} createdAtDataTime: {}",
                             m.getName(), m.getCount(), m.getCreatedAtTime());
                 });
-        manager.sendNewMessageToQueue(poisonPillPojo);
+
         long endTime = System.currentTimeMillis();
         double elapsedSeconds = (endTime - startTime) / 1000.0;
         double messagesPerSecond = total.get() / elapsedSeconds;
